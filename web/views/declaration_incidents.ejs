@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>NFE - Déclaration d'incidents</title>
+    <link rel="stylesheet" href="css/declaration_incidents.css" />
+</head>
+
+<header>
+    <a href="/">
+        <img src="images/logo.png" alt="Logo NFE" width="auto" height="auto" />
+    </a>
+</header>
+
+<body>
+    <h1 class="title">Déclaration d'incident</h1>
+
+    <form method="post" action="/declaration_incidents" class="declaration_form">
+        <div class="form_line">
+            <label class="form_label" for="place">Lieu de l'incident :</label>
+            <input type="text" name="place" class="form_input" /><br>
+        </div>
+
+        <div class="form_line">
+            <label class="form_label" for="incident_date">Date d'apparition :</label>
+            <input type="date" name="date" class="form_input" /><br>
+        </div>
+
+        <div class="form_line">
+            <label class="form_label" for="client_name">Nom du client :</label>
+            <input type="text" name="name" class="form_input" /><br>
+        </div>
+
+        <div class="form_line">
+            <label class="form_label" for="degradation_type">Type de dégradation :</label>
+            <select name="type" class="form_input">
+                    <% types.forEach(function(type) { %>
+                        <option value="<%= type.name %>"><%= type.text %></option>
+                    <% }); %>
+            </select><br>
+        </div>
+
+        <div class="form_line">
+            <label class="form_label" for="phone_number">Numéro de téléphone :</label>
+            <input type="text" name="phone_number" class="form_input" /><br>
+        </div>
+
+        <div class="form_line">
+            <label class="form_label" for="mail_address">Adresse mail :</label>
+            <input type="email" name="mail_address" class="form_input" /><br>
+        </div>
+
+        <div class="form_line">
+            <label class="form_label" for="comment">Commentaire :</label>
+            <textarea name="comment" class="form_input"></textarea><br><br>
+        </div>
+
+        <input type="submit" name="report_incident_button" id="report_incident_button" value="Déclarer l'incident" />
+    </form>
+</body>
+
+</html>

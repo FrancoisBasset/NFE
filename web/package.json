@@ -1,0 +1,22 @@
+{
+  "name": "nfe-web",
+  "version": "0.0.1",
+  "description": "Web part of NFE project",
+  "main": "index.js",
+  "scripts": {
+    "dev": "node-dev index.js",
+    "start": "node index.js",
+    "scanner": "sonar-scanner",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "francois",
+  "license": "ISC",
+  "dependencies": {
+    "@sentry/node": "^5.0.5",
+    "ejs": "^2.6.1",
+    "express": "^4.16.4",
+    "node-dev": "^3.1.3",
+    "request": "^2.88.0",
+    "sentry": "^0.1.2"
+  }
+}

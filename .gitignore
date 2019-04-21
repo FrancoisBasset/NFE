@@ -1,0 +1,8 @@
+/web/.scannerwork
+/web/node_modules
+/web/package-lock.json
+/web/sonar-project.properties
+/backoffice/.scannerwork
+/backoffice/node_modules
+/backoffice/package-lock.json
+/backoffice/sonar-project.properties
