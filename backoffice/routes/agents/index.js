@@ -1,6 +1,8 @@
 const express = require('express');
 const router = express.Router();
 
-router.use("/", express.static('public/html/agents'));
+router.get('/', (req, res) => {
+    res.render('agents/index.ejs');
+})
 
 module.exports = router;

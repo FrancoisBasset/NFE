@@ -1,0 +1,21 @@
+#back_office_logo {
+    font-size: 60px;
+    text-decoration: none;
+    color: white;    
+
+    background: linear-gradient(to right, #F1471C 0%, #F1471C 50%, #00337D 0%, #00337D 100%);
+    padding: 10px;
+}
+
+#disconnect_button {
+    position: fixed;
+
+    top: 5px;
+    right: 5px;
+
+    height: 50px;
+
+    border: none;
+    background-color: darkslategrey;
+    color: white;
+}

@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>Back office NFE - Incidents</title>
+    <link rel="stylesheet" href="css/shared.css" />
+</head>
+
+<%- include("../header"); %>
+
+<body>
+    <h1 class="title">Incidents</h1>
+
+    <table>
+        <thead>
+            <tr>
+                <td colspan="3">Liste des incidents</td>
+            </tr>
+            <tr>
+                <td>ID</td>
+                <td>Lien</td>
+                <td>Name</td>
+            </tr>
+        </thead>
+
+        <% incidents.forEach((incident) => { %>
+        <tr>
+            <td><input type="checkbox"></td>
+            <td><%= incident.id %></td>
+            <td><a href="/incidents/<%= incident.id %>">Lien de l'incident</a></td>
+            <td><%= incident.name %></td>
+        </tr>
+        <% }) %>
+    </table>
+
+    <aside>
+            <form method="post" action="/incidents">
+                <input type="text" name="name" />
+                <input type="submit" name="button" />
+            </form>
+    </aside>
+
+</body>

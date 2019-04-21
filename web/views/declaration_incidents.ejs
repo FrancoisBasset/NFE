@@ -6,11 +6,7 @@
     <link rel="stylesheet" href="css/declaration_incidents.css" />
 </head>
 
-<header>
-    <a href="/">
-        <img src="images/logo.png" alt="Logo NFE" width="auto" height="auto" />
-    </a>
-</header>
+<%- include("header"); %>
 
 <body>
     <h1 class="title">Déclaration d'incident</h1>
@@ -55,7 +51,7 @@
             <textarea name="comment" class="form_input"></textarea><br><br>
         </div>
 
-        <input type="submit" name="report_incident_button" id="report_incident_button" value="Déclarer l'incident" />
+        <input type="submit" name="report_incident_input" id="report_incident_input" value="Déclarer l'incident" />
     </form>
 </body>
 

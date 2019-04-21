@@ -3,7 +3,7 @@ const app = express();
 const bodyParser = require('body-parser');
 const request = require('request');
 
-require('./public/js/sentry')(app);
+require('./sentry')(app);
 
 app.listen(80, 'nfe.fr', () => {
     console.log('Web started on port 80');
@@ -38,7 +38,7 @@ app.post('/declaration_incidents', (req, res) => {
         comment: req.body.comment
     };
 
-    res.render('remain_declaration.ejs', {incident: incident, client: client});
+    res.render('remain_declaration.ejs', {incident: incident, _client: client});
 });
 
 app.get('/types', (req, res) => {

@@ -1,14 +1,27 @@
-<h1>Client</h1>
-<ul>
-    <li>Prenom : <%= client.name %></li>
-    <li>Téléphone : <%= client.phone_number %></li>
-    <li>Adresse mail : <%= client.mail_address %></li>
-    <li>Commentaire : <%= client.comment %></li>
-</ul>
+<!DOCTYPE html>
+<html>
 
-<h1>Incident</h1>
-<ul>
-    <li>Lieu : <%= incident.place %></li>
-    <li>Date : <%= incident.date %></li>
-    <li>Type : <%= incident.type %></li>
-</ul>
+<head>
+    <title>Rappel</title>
+</head>
+
+<%- include("header"); %>
+
+<body>
+    <h1>Client</h1>
+    <ul>
+        <li>Prenom : <%= _client.name %></li>
+        <li>Téléphone : <%= _client.phone_number %></li>
+        <li>Adresse mail : <%= _client.mail_address %></li>
+        <li>Commentaire : <%= _client.comment %></li>
+    </ul>
+
+    <h1>Incident</h1>
+    <ul>
+        <li>Lieu : <%= incident.place %></li>
+        <li>Date : <%= incident.date %></li>
+        <li>Type : <%= incident.type %></li>
+    </ul>
+</body>
+
+</html>

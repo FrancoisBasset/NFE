@@ -1,7 +1,3 @@
-button:hover {
-    cursor: pointer;
-}
-
 .title {
     text-align: center;
 }
@@ -29,7 +25,7 @@ button:hover {
     width: 40%;
 }
 
-#report_incident_button {
+#report_incident_input {
     width: 60%;
     height: 60px;
 
@@ -39,4 +35,12 @@ button:hover {
     background: linear-gradient(to right, #F1471C 0%, #F1471C 50%, #00337D 0%, #00337D 100%);
     border-style: solid;
     border: none;
+}
+
+#report_incident_input:hover {
+    cursor: pointer;
+}
+
+input[type=text]:hover {
+    cursor: pointer;
 }

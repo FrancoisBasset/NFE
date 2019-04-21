@@ -1,4 +1,4 @@
-function Sentry(app) {
+function sentry(app) {
     const Sentry = require('@sentry/node');
 
     Sentry.init({ dsn: 'https://d547fae43622419b9dc6a012c385b410@sentry.io/1432720' });
@@ -13,4 +13,4 @@ function Sentry(app) {
     });
 }
 
-module.exports = Sentry;
+module.exports = sentry;

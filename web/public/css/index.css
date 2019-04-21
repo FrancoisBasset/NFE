@@ -1,7 +1,3 @@
-button:hover {
-    cursor: pointer;
-}
-
 #menu {
     text-align: center;
     top: 50%;
@@ -15,6 +11,10 @@ button:hover {
     color: white;
     font-size: 25px;
     font-weight: bold;
+}
+
+.menu_button:hover {
+    cursor: pointer;
 }
 
 #declaration_incidents_button {
