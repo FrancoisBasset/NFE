@@ -33,8 +33,8 @@ app.post('/declaration_incidents', (req, res) => {
 
     const client = {
         name: req.body.name,
-        phone_number: req.body.phone_number,
-        mail_address: req.body.mail_address,
+        phone: req.body.phone,
+        mail: req.body.mail,
         comment: req.body.comment
     };
 
