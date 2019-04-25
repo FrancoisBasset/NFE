@@ -1,14 +1,14 @@
 const express = require('express');
 const app = express();
-const bodyParser = require('body-parser');
 const request = require('request');
 
 require('./sentry')(app);
 
-app.listen(80, 'nfe.fr', () => {
+app.listen(process.env.port || 80, () => {
     console.log('Web started on port 80');
 });
 
+const bodyParser = require('body-parser');
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
 
@@ -19,8 +19,8 @@ app.get('/', (req, res) => {
 });
 
 app.get('/declaration_incidents', (req, res) => {
-    request.get('http://127.0.0.1/types', { json: true }, (e, r) => {
-        res.render('declaration_incidents.ejs', { types: r.body.result});
+    request.get('http://127.0.0.1/types', { json: true }, (err, res) => {
+        res.render('declaration_incidents.ejs', { types: res.body.result});
     });
 });
 
