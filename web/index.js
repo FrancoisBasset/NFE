@@ -5,7 +5,7 @@ const request = require('request');
 
 require('./sentry')(app);
 
-app.listen(80, 'nfe.fr', () => {
+app.listen(80, () => {
     console.log('Web started on port 80');
 });
 
@@ -24,10 +24,10 @@ app.get('/declaration_incidents', (req, res) => {
     });
 });
 
-var data = require('../backoffice/Data');
+//var data = require('../backoffice/Data');
 
 app.post('/declaration_incidents', (req, res) => {
-    const id = data.incidents.length + 1;
+    const id = 11;//data.incidents.length + 1;
 
     const incident = {
         id: id,
