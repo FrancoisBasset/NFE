@@ -4,7 +4,7 @@ const bodyParser = require('body-parser');
 
 require('./sentry')(app);
 
-app.listen(process.env.port || 81, () => {
+app.listen(process.env.port || 80, () => {
     console.log('Back office started on port 81');
 });
 
