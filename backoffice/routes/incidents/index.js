@@ -4,6 +4,7 @@ const router = express.Router();
 var data = require('../../Data');
 
 router.get('/', (req, res) => {
+    console.log(data.incidents);
     res.render('incidents/index.ejs', { incidents: data.incidents});
 });
 

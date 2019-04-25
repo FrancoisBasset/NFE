@@ -1,10 +1,11 @@
 const express = require('express');
 const app = express();
 const request = require('request');
+const sync_request = require('sync-request');
 
 require('./sentry')(app);
 
-app.listen(process.env.port || 80, () => {
+app.listen(process.env.PORT || 80, () => {
     console.log('Web started on port 80');
 });
 
@@ -19,14 +20,14 @@ app.get('/', (req, res) => {
 });
 
 app.get('/declaration_incidents', (req, res) => {
-    request.get('http://127.0.0.1/types', { json: true }, (err, res) => {
-        res.render('declaration_incidents.ejs', { types: res.body.result});
+    request.get('http://127.0.0.1/types', { json: true }, (e, r) => {
+        res.render('declaration_incidents.ejs', { types: r.body.result});
     });
 });
 
-var data = require('../backoffice/Data');
-
 app.post('/declaration_incidents', (req, res) => {
+    const data = getData(req.headers.host);
+
     const id = data.incidents.length + 1;
 
     const incident = {
@@ -41,6 +42,8 @@ app.post('/declaration_incidents', (req, res) => {
             comment: req.body.comment
         }
     };
+
+    sendIncident(incident, req.headers.host);
 
     res.render('remain_declaration.ejs', {incident: incident });
 });
@@ -57,3 +60,24 @@ app.get('/types', (req, res) => {
         ]
     });
 });
+
+function getData(host) {
+    if (host == 'nfe.fr') {
+        host = 'http://127.0.0.1:81/data';
+    } else {
+        host = 'https://nfe-backoffice.herokuapp.com/data';
+    }
+    
+    const res = sync_request('get', host);
+    return JSON.parse(res.getBody('utf8'));
+}
+
+function sendIncident(incident, host) {
+    if (host == 'nfe.fr') {
+        host = 'http://127.0.0.1:81/data';
+    } else {
+        host = 'https://nfe-backoffice.herokuapp.com/data';
+    }
+console.log(incident);
+    sync_request('post', host, { json: incident});
+}

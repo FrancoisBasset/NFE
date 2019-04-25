@@ -46,6 +46,17 @@ app.get('/logout', (req, res) => {
     res.redirect('/');
 });
 
+var data = require('./Data');
+
+app.get('/data', (req, res) => {
+    res.json(data);
+});
+
+app.post('/data', (req, res) => {
+    data.incidents.push(req.body);
+    res.status(201).end();
+});
+
 app.use('/incidents', require('./routes/incidents'));
 app.use('/interventions', require('./routes/interventions'));
 app.use('/agents', require('./routes/agents'));
