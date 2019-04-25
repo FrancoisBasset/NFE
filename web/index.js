@@ -20,7 +20,14 @@ app.get('/', (req, res) => {
 });
 
 app.get('/declaration_incidents', (req, res) => {
-    request.get('http://127.0.0.1/types', { json: true }, (e, r) => {
+    var host = '';
+    if (req.headers.host == 'nfe.fr') {
+        host = 'http://127.0.0.1/types';
+    } else {
+        host = 'https://nfe-web.herokuapp.com/types';
+    }
+
+    request.get(host, { json: true }, (e, r) => {
         res.render('declaration_incidents.ejs', { types: r.body.result});
     });
 });
