@@ -16,7 +16,15 @@ app.use(bodyParser.urlencoded({ extended: true }));
 app.use('/', express.static('./public'));
 
 app.get('/', (req, res) => {
-    res.render('index.ejs');
+    var host = '';
+
+    if (req.headers.host == 'nfe.fr') {
+        host = 'http://127.0.0.1:81';
+    } else {
+        host = 'https://nfe-backoffice.herokuapp.com';
+    }
+
+    res.render('index.ejs', { host: host});
 });
 
 app.get('/declaration_incidents', (req, res) => {
