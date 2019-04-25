@@ -32,8 +32,6 @@ app.get('/login', (req, res) => {
 });
 
 app.post('/login', (req, res) => {
-    console.log(req.body);
-
     if (req.body.email == 'a@a.fr' && req.body.id == 'a' && req.body.password == 'a') {
         connected = true;
 

@@ -10,6 +10,16 @@
 
 <body>
     <h1>Le nom de l'incident est <%= incident.name %></h1>
+
+    <form method="post" action="/incidents">
+        <input type="submit" name="delete_submit" value="Supprimer l'incident" />
+        <input type="hidden" name="id" value="<%= incident.id %>" />
+    </form>
+
+    <form method="post" action="/incidents">
+        <input type="submit" name="validate_submit" value="Valider l'incident" />
+        <input type="hidden" name="id" value="<%= incident.id %>" />
+    </form>
 </body>
 
 </html>

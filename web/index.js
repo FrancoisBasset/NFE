@@ -24,21 +24,25 @@ app.get('/declaration_incidents', (req, res) => {
     });
 });
 
+var data = require('../backoffice/Data');
+
 app.post('/declaration_incidents', (req, res) => {
+    const id = data.incidents.length + 1;
+
     const incident = {
+        id: id,
         place: req.body.place,
         date: req.body.date,
-        type: req.body.type
+        type: req.body.type,
+        client: {
+            name: req.body.name,
+            phone: req.body.phone,
+            mail: req.body.mail,
+            comment: req.body.comment
+        }
     };
 
-    const client = {
-        name: req.body.name,
-        phone: req.body.phone,
-        mail: req.body.mail,
-        comment: req.body.comment
-    };
-
-    res.render('remain_declaration.ejs', {incident: incident, _client: client});
+    res.render('remain_declaration.ejs', {incident: incident });
 });
 
 app.get('/types', (req, res) => {

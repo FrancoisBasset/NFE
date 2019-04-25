@@ -2,7 +2,7 @@
 <html>
 
 <head>
-    <title>Rappel</title>
+    <title>Incident n°<%= incident.id %></title>
 </head>
 
 <%- include("header"); %>
@@ -10,10 +10,10 @@
 <body>
     <h1>Client</h1>
     <ul>
-        <li>Prenom : <%= _client.name %></li>
-        <li>Téléphone : <%= _client.phone %></li>
-        <li>Adresse mail : <%= _client.mail %></li>
-        <li>Commentaire : <%= _client.comment %></li>
+        <li>Prenom : <%= incident.client.name %></li>
+        <li>Téléphone : <%= incident.client.phone %></li>
+        <li>Adresse mail : <%= incident.client.mail %></li>
+        <li>Commentaire : <%= incident.client.comment %></li>
     </ul>
 
     <h1>Incident</h1>

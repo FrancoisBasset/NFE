@@ -10,6 +10,34 @@
 
 <body>
     <h1 class="title">Interventions</h1>
+
+    <table border="2">
+        <thead>
+            <td>ID</td>
+            <td>Place</td>
+            <td>Date</td>
+            <td>Type d'intervention</td>
+            <td>Client</td>            
+            <td>Numéro de téléphone</td>
+            <td>Adresse mail</td>
+            <td>Commentaire</td>
+        </thead>
+
+        <tbody>
+            <% interventions.forEach((intervention) => { %>
+            <tr>
+                <td><%= intervention.id %></td>
+                <td><%= intervention.place %></td>
+                <td><%= intervention.date %></td>
+                <td><%= intervention.type %></td>
+                <td><%= intervention.client.name %></td>                
+                <td><%= intervention.client.phone %></td>
+                <td><%= intervention.client.mail %></td>
+                <td><%= intervention.client.comment %></td>
+            </tr>
+            <% }); %>
+        </tbody>
+    </table>
 </body>
 
 </html>

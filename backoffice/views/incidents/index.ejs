@@ -4,6 +4,7 @@
 <head>
     <title>Back office NFE - Incidents</title>
     <link rel="stylesheet" href="css/shared.css" />
+    <link rel="stylesheet" href="css/incidents.css" />
 </head>
 
 <%- include("../header"); %>
@@ -11,33 +12,72 @@
 <body>
     <h1 class="title">Incidents</h1>
 
-    <table>
-        <thead>
-            <tr>
-                <td colspan="3">Liste des incidents</td>
-            </tr>
-            <tr>
-                <td>ID</td>
-                <td>Lien</td>
-                <td>Name</td>
-            </tr>
-        </thead>
+    <h2>Liste des incidents</h2>
 
-        <% incidents.forEach((incident) => { %>
-        <tr>
-            <td><input type="checkbox"></td>
-            <td><%= incident.id %></td>
-            <td><a href="/incidents/<%= incident.id %>">Lien de l'incident</a></td>
-            <td><%= incident.name %></td>
-        </tr>
-        <% }) %>
-    </table>
+    <form method="post" action="/incidents">
+        <input type="submit" name="delete_submit" value="Effacer les selections" class="control_button"/>
+        <input type="submit" name="validate_submit" value="Valider les selections" class="control_button" />
 
-    <aside>
-            <form method="post" action="/incidents">
-                <input type="text" name="name" />
-                <input type="submit" name="button" />
-            </form>
-    </aside>
+        <table border="2">
+            <thead>                
+                <tr>
+                    <td><input type="checkbox" id="all_checkbox" /></td>
+                    <td>ID</td>
+                    <td>Lien</td>
+                    <td>Lieu</td>
+                    <td>Date</td>                    
+                    <td>Type d'incident</td>
+                    <td>Client</td>
+                    <td>Numéro de téléphone</td>
+                    <td>Adresse mail</td>
+                    <td>Commentaire</td>
+                </tr>
+            </thead>
 
+            <tbody>
+                <% incidents.forEach((incident) => { %>
+                <tr>
+                    <td>
+                        <input type="checkbox" name="incidents[]" value="<%= incident.id %>" />
+                    </td>
+                    <td><%= incident.id %></td>
+                    <td><a href="/incidents/<%= incident.id %>">Lien de l'incident</a></td>
+                    <td><%= incident.place %></td>
+                    <td><%= incident.date %></td>
+                    <td><%= incident.type %></td>
+                    <td><%= incident.client.name %></td>                    
+                    <td><%= incident.client.phone %></td>
+                    <td><%= incident.client.mail %></td>
+                    <td><%= incident.client.comment %></td>
+                    <td>
+                        <form method="post" action="/incidents">
+                            <input type="submit" name="delete_submit" value="Supprimer l'incident" class="control_button" />                            
+                            <input type="hidden" name="id" value="<%= incident.id %>" />
+                        </form>
+                    </td>
+                    <td>
+                        <form method="post" action="/incidents">
+                            <input type="submit" name="validate_submit" value="Valider l'incident" class="control_button" />                            
+                            <input type="hidden" name="id" value="<%= incident.id %>" />
+                        </form>
+                    </td>
+                </tr>
+                <% }) %>
+            </tbody>
+        </table>
+    </form>
 </body>
+
+<script>
+    document.getElementById('all_checkbox').addEventListener('click', function() {
+        if (this.checked) {
+            document.getElementsByName('incidents[]').forEach((checkbox) => {
+                checkbox.setAttribute('checked', 'checked');
+            });
+        } else {
+            document.getElementsByName('incidents[]').forEach((checkbox) => {
+                checkbox.removeAttribute('checked');
+            });
+        }
+    });
+</script>
