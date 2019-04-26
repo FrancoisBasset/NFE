@@ -2,14 +2,14 @@
 <html>
 
 <head>
-    <title>Back office NFE - Incident <%= incident.name %></title>
+    <title>Back office NFE - Incident <%= incident.id %></title>
     <link rel="stylesheet" href="css/shared.css" />
 </head>
 
 <%- include("../header"); %>
 
 <body>
-    <h1>Le nom de l'incident est <%= incident.name %></h1>
+    <h1>Le nom de l'incident est <%= incident.id %></h1>
 
     <form method="post" action="/incidents">
         <input type="submit" name="delete_submit" value="Supprimer l'incident" />

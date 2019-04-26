@@ -28,16 +28,11 @@ app.get('/', (req, res) => {
 });
 
 app.get('/declaration_incidents', (req, res) => {
-    var host = '';
-    if (req.headers.host == 'nfe.fr') {
-        host = 'http://127.0.0.1/types';
-    } else {
-        host = 'https://nfe-web.herokuapp.com/types';
-    }
+    const data = getData(req.headers.host);
 
-    request.get(host, { json: true }, (e, r) => {
-        res.render('declaration_incidents.ejs', { types: r.body.result});
-    });
+    //request.get(host, { json: true }, (e, r) => {
+        res.render('declaration_incidents.ejs', { types: data.types });
+    //});
 });
 
 app.post('/declaration_incidents', (req, res) => {
@@ -60,20 +55,7 @@ app.post('/declaration_incidents', (req, res) => {
 
     sendIncident(incident, req.headers.host);
 
-    res.render('remain_declaration.ejs', {incident: incident });
-});
-
-app.get('/types', (req, res) => {
-    res.send({
-        result: [
-            {name: 'panne', text: 'Panne de courant'},
-            {name: 'compteur_casse', text: 'Compteur cassé'},
-            {name: 'compteur_bugge', text: 'Compteur buggé'},
-            {name: 'sous_voltage', text: 'Sous-voltage'},
-            {name: 'sur_voltage', text: 'Sur-voltage'},
-            {name: 'pylone_casse', text: 'Pylone cassé'}
-        ]
-    });
+    res.render('declaration_incidents.ejs', { types: data.types, incident: incident});
 });
 
 function getData(host) {
@@ -93,6 +75,6 @@ function sendIncident(incident, host) {
     } else {
         host = 'https://nfe-backoffice.herokuapp.com/data';
     }
-console.log(incident);
+    
     sync_request('post', host, { json: incident});
 }

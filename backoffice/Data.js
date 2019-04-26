@@ -1,5 +1,14 @@
 var data = {};
 
+data.types = [
+    {name: 'panne', text: 'Panne de courant'},
+    {name: 'compteur_casse', text: 'Compteur cassé'},
+    {name: 'compteur_bugge', text: 'Compteur buggé'},
+    {name: 'sous_voltage', text: 'Sous-voltage'},
+    {name: 'sur_voltage', text: 'Sur-voltage'},
+    {name: 'pylone_casse', text: 'Pylone cassé'}
+];
+
 data.incidents = [
   {
     id: 1,

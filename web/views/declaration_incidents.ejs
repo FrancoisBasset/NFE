@@ -14,22 +14,17 @@
     <form method="post" action="/declaration_incidents" class="declaration_form">
         <div class="form_line">
             <label class="form_label" for="place">Lieu de l'incident :</label>
-            <input type="text" name="place" class="form_input" /><br>
+            <input type="text" name="place" id="place" class="form_input" /><br>
         </div>
 
         <div class="form_line">
             <label class="form_label" for="incident_date">Date d'apparition :</label>
-            <input type="date" name="date" class="form_input" /><br>
-        </div>
-
-        <div class="form_line">
-            <label class="form_label" for="client_name">Nom du client :</label>
-            <input type="text" name="name" class="form_input" /><br>
-        </div>
+            <input type="date" name="date" id="date" class="form_input" /><br>
+        </div>        
 
         <div class="form_line">
             <label class="form_label" for="degradation_type">Type de dégradation :</label>
-            <select name="type" class="form_input">
+            <select name="type" id="type" class="form_input">
                     <% types.forEach(function(type) { %>
                         <option value="<%= type.name %>"><%= type.text %></option>
                     <% }); %>
@@ -37,22 +32,62 @@
         </div>
 
         <div class="form_line">
+            <label class="form_label" for="client_name">Nom du client :</label>
+            <input type="text" name="name" id="name" class="form_input" /><br>
+        </div>
+
+        <div class="form_line">
             <label class="form_label" for="phone">Numéro de téléphone :</label>
-            <input type="text" name="phone" class="form_input" /><br>
+            <input type="text" name="phone" id="phone" class="form_input" /><br>
         </div>
 
         <div class="form_line">
             <label class="form_label" for="mail">Adresse mail :</label>
-            <input type="email" name="mail" class="form_input" /><br>
+            <input type="email" name="mail" id="mail" class="form_input" /><br>
         </div>
 
         <div class="form_line">
             <label class="form_label" for="comment">Commentaire :</label>
-            <textarea name="comment" class="form_input"></textarea><br><br>
+            <textarea name="comment" id="comment" class="form_input"></textarea><br><br>
         </div>
 
         <input type="submit" name="report_incident_input" id="report_incident_input" value="Déclarer l'incident" />
     </form>
+    
+        <% if (locals.incident) { %>
+        <div id="confirmation_div">
+            <h1>L'incident a bien été créé</h1>
+            
+            <h1>Client</h1>
+            <ul>
+                <li>Prenom : <%= incident.client.name %></li>
+                <li>Téléphone : <%= incident.client.phone %></li>
+                <li>Adresse mail : <%= incident.client.mail %></li>
+                <li>Commentaire : <%= incident.client.comment %></li>
+            </ul>
+
+            <h1>Incident</h1>
+            <ul>
+                <li>Lieu : <%= incident.place %></li>
+                <li>Date : <%= incident.date %></li>
+                <li>Type : <%= incident.type %></li>
+            </ul>
+        </div>
+        <% } %>
+    
+
+    <!--<button id="report_incident_input">OK</button>-->
 </body>
 
 </html>
+<!--
+    <script>
+    document.getElementById('report_incident_input').addEventListener('click', function() {
+        document.getElementById('confirmation_name').textContent = document.getElementById('place').value;
+        document.getElementById('confirmation_name').textContent = document.getElementById('place').value;
+        document.getElementById('confirmation_name').textContent = document.getElementById('place').value;
+        document.getElementById('confirmation_name').textContent = document.getElementById('place').value;
+        document.getElementById('confirmation_name').textContent = document.getElementById('place').value;
+        document.getElementById('confirmation_name').textContent = document.getElementById('place').value;
+    });
+</script>-->

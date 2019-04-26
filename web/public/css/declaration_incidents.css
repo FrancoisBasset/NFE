@@ -44,3 +44,14 @@
 input[type=text]:hover {
     cursor: pointer;
 }
+
+#confirmation_div {
+    text-align: center;
+    width: 60%;
+
+    margin-left: auto;
+  margin-right: auto;
+
+    background-color: limegreen;
+    color: white;
+}
