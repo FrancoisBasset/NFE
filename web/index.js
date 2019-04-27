@@ -40,6 +40,11 @@ app.post('/declaration_incidents', (req, res) => {
 
     const id = data.incidents.length + 1;
 
+    if (!incidentIsFilled(req.body)) {
+        res.render('declaration_incidents.ejs', { types: data.types, incorrect: true});
+        return;
+    }
+
     const incident = {
         id: id,
         place: req.body.place,
@@ -77,4 +82,20 @@ function sendIncident(incident, host) {
     }
     
     sync_request('post', host, { json: incident});
+}
+
+function incidentIsFilled(body) {
+    if (
+        body.place.trim() == '' ||
+        body.date.trim() == '' ||
+        body.type.trim() == '' ||
+        body.name.trim() == '' ||
+        body.phone.trim() == '' || isNaN(body.phone.trim()) || body.phone.length != 10 ||
+        body.mail.trim() == '' ||
+        body.comment.trim() == ''
+    ) {
+        return false;
+    }
+
+    return true;
 }

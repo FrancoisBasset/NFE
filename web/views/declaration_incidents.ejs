@@ -74,6 +74,12 @@
             </ul>
         </div>
         <% } %>
+
+        <% if (locals.incorrect) { %>
+            <div id="incorrect_div">
+                <h1>Le formulaire n'a pas été correctement renseigné</h1>
+            </div>
+        <% } %>
     
 
     <!--<button id="report_incident_input">OK</button>-->
