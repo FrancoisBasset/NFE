@@ -4,7 +4,6 @@
 
 .declaration_form {
     position: relative;
-    top: 20%;
     text-align: center;   
 }
 
@@ -15,8 +14,6 @@
 .form_label {
     position: absolute;
     left: 20%;
-
-    font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
 }
 
 .form_input {
@@ -26,6 +23,9 @@
 }
 
 #report_incident_input {
+    position: relative;
+    top: 10px;
+
     width: 60%;
     height: 60px;
 
@@ -35,14 +35,6 @@
     background: linear-gradient(to right, #F1471C 0%, #F1471C 50%, #00337D 0%, #00337D 100%);
     border-style: solid;
     border: none;
-}
-
-#report_incident_input:hover {
-    cursor: pointer;
-}
-
-input[type=text]:hover {
-    cursor: pointer;
 }
 
 #confirmation_div {

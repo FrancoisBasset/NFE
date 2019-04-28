@@ -1,0 +1,19 @@
+* {
+    font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;    
+}
+
+input:hover {
+    cursor: pointer;
+}
+
+textarea:hover {
+    cursor: pointer;
+}
+
+select:hover {
+    cursor: pointer;
+}
+
+button:hover {
+    cursor: pointer;
+}

@@ -1,6 +1,5 @@
 #menu {
     text-align: center;
-    top: 50%;
 }
 
 .menu_button {
@@ -13,16 +12,14 @@
     font-weight: bold;
 }
 
-.menu_button:hover {
-    cursor: pointer;
-}
-
 #declaration_incidents_button {
-    background: #F1471C;
     margin-right: 50px;
+
+    background: #F1471C;
 }
 
 #back_office_button {
-    background: #00337D;
     margin-left: 50px;
+
+    background: #00337D;
 }

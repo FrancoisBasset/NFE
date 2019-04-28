@@ -4,6 +4,7 @@
 <head>
     <title>NFE - Déclaration d'incidents</title>
     <link rel="stylesheet" href="css/declaration_incidents.css" />
+    <link rel="stylesheet" href="css/global.css" />
 </head>
 
 <%- include("header"); %>
@@ -25,9 +26,9 @@
         <div class="form_line">
             <label class="form_label" for="degradation_type">Type de dégradation :</label>
             <select name="type" id="type" class="form_input">
-                    <% types.forEach(function(type) { %>
-                        <option value="<%= type.name %>"><%= type.text %></option>
-                    <% }); %>
+                <% types.forEach(function(type) { %>
+                    <option value="<%= type.name %>"><%= type.text %></option>
+                <% }); %>
             </select><br>
         </div>
 
@@ -54,7 +55,7 @@
         <input type="submit" name="report_incident_input" id="report_incident_input" value="Déclarer l'incident" />
     </form>
     
-        <% if (locals.incident) { %>
+    <% if (locals.incident) { %>
         <div id="confirmation_div">
             <h1>L'incident a bien été créé</h1>
             
@@ -73,14 +74,13 @@
                 <li>Type : <%= incident.type %></li>
             </ul>
         </div>
-        <% } %>
+    <% } %>
 
-        <% if (locals.incorrect) { %>
-            <div id="incorrect_div">
-                <h1>Le formulaire n'a pas été correctement renseigné</h1>
-            </div>
-        <% } %>
-    
+    <% if (locals.incorrect) { %>
+        <div id="incorrect_div">
+            <h1>Le formulaire n'a pas été correctement renseigné</h1>
+        </div>
+    <% } %>    
 
     <!--<button id="report_incident_input">OK</button>-->
 </body>
