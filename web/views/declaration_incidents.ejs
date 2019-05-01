@@ -63,22 +63,15 @@
     
     <% if (locals.incident) { %>
         <div class="confirmation_div">
-            <h1>L'incident a bien été créé</h1>
-            
-            <h1>Client</h1>
-            <ul>
-                <li>Prenom : <%= incident.client.name %></li>
-                <li>Téléphone : <%= incident.client.phone %></li>
-                <li>Adresse mail : <%= incident.client.mail %></li>
-                <li>Commentaire : <%= incident.client.comment %></li>
-            </ul>
+            <p>L'incident a bien été créé avec ces informations :</p>
 
-            <h1>Incident</h1>
-            <ul>
-                <li>Lieu : <%= incident.place %></li>
-                <li>Date : <%= incident.date %></li>
-                <li>Type : <%= incident.type %></li>
-            </ul>
+            <text>Lieu de l'incident : <%= incident.place %></text><br>
+            <text>Date d'apparition : <%= incident.date %></text><br>
+            <text>Type d'incident : <%= incident.type %></text><br>
+            <text>Nom du client : <%= incident.client.name %></text><br>
+            <text>Numéro de téléphone : <%= incident.client.phone %></text><br>
+            <text>Adresse mail : <%= incident.client.mail %></text><br>
+            <text>Commentaire : <%= incident.client.comment %></text>
         </div>
     <% } %>
 
