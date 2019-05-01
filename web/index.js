@@ -77,7 +77,7 @@ app.post('/declaration_incidents', (req, res) => {
 
 function getHost(host) {
     if (host == 'nfe.fr') {
-        return 'http://127.0.0.1:81';
+        return 'http://nfe.fr:81';
     } else {
         return 'https://nfe-backoffice.herokuapp.com';
     }
