@@ -32,7 +32,7 @@ app.get('/login', (req, res) => {
 });
 
 app.post('/login', (req, res) => {
-    if (req.body.email == 'a@a.fr' && req.body.id == 'a' && req.body.password == 'a') {
+    if (req.body.id == 'a' && req.body.password == 'a') {
         connected = true;
 
         res.redirect('/');
