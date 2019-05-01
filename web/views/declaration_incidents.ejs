@@ -24,7 +24,7 @@
         </div>        
 
         <div class="form_line">
-            <label class="form_label" for="degradation_type">Type de dégradation :</label>
+            <label class="form_label" for="incident_type">Type d'incident :</label>
             <select name="type" id="type" class="form_input">
                 <% types.forEach(function(type) { %>
                     <option value="<%= type.name %>"><%= type.text %></option>
@@ -54,9 +54,15 @@
 
         <input type="submit" name="report_incident_input" id="report_incident_input" value="Déclarer l'incident" />
     </form>
+
+    <% if (locals.error) { %>
+        <div class="error_div">
+            <p><h3><%= error %></h3></p>
+        </div>
+    <% } %>
     
     <% if (locals.incident) { %>
-        <div id="confirmation_div">
+        <div class="confirmation_div">
             <h1>L'incident a bien été créé</h1>
             
             <h1>Client</h1>
@@ -77,8 +83,8 @@
     <% } %>
 
     <% if (locals.incorrect) { %>
-        <div id="incorrect_div">
-            <h1>Le formulaire n'a pas été correctement renseigné</h1>
+        <div class="error_div">
+            <h3>Le formulaire n'a pas été correctement renseigné</h3>
         </div>
     <% } %>    
 
@@ -87,7 +93,6 @@
 
 </html>
 <!--
-    <script>
     document.getElementById('report_incident_input').addEventListener('click', function() {
         document.getElementById('confirmation_name').textContent = document.getElementById('place').value;
         document.getElementById('confirmation_name').textContent = document.getElementById('place').value;
@@ -95,5 +100,5 @@
         document.getElementById('confirmation_name').textContent = document.getElementById('place').value;
         document.getElementById('confirmation_name').textContent = document.getElementById('place').value;
         document.getElementById('confirmation_name').textContent = document.getElementById('place').value;
-    });
-</script>-->
+    });-->
+

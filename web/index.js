@@ -1,7 +1,6 @@
 const express = require('express');
 const app = express();
 const request = require('request');
-const sync_request = require('sync-request');
 
 require('./sentry')(app);
 
@@ -18,51 +17,63 @@ app.use('/', express.static('./public'));
 app.get('/', (req, res) => {
     var host = getHost(req.headers.host);
 
-    res.render('index.ejs', { host: host});
+    request.get(host, (e, r) => {
+        res.render('index.ejs', { host: host, back_office: !e});
+    });    
 });
 
 app.get('/declaration_incidents', (req, res) => {
-    const data = getData(req.headers.host);
+    const host = getHost(req.headers.host) + "/data";
 
-    //request.get(host, { json: true }, (e, r) => {
-        res.render('declaration_incidents.ejs', { types: data.types });
-    //});
+    request.get(host, { json: true }, (e, r, body) => {
+        if (e) {
+            res.render('declaration_incidents.ejs', { types: [], error: 'Impossible de récupérer les types d\'incidents, Impossible de créer un incident, veuillez réessayer ultérieurement'});
+            return;
+        }
+        
+        res.render('declaration_incidents.ejs', { types: body.types });
+    });
 });
 
 app.post('/declaration_incidents', (req, res) => {
-    const data = getData(req.headers.host);
+    const host = getHost(req.headers.host) + "/data";
 
-    const id = data.incidents.length + 1;
-
-    if (!incidentIsFilled(req.body)) {
-        res.render('declaration_incidents.ejs', { types: data.types, incorrect: true});
-        return;
-    }
-
-    const incident = {
-        id: id,
-        place: req.body.place,
-        date: req.body.date,
-        type: req.body.type,
-        client: {
-            name: req.body.name,
-            phone: req.body.phone,
-            mail: req.body.mail,
-            comment: req.body.comment
+    request.get(host, { json: true}, (e, r, data) => {
+        if (e) {
+            res.render('declaration_incidents.ejs', { types: [], error: 'Impossible de créer un incident, veuillez réessayer ultérieurement'});
+            return;
         }
-    };
 
-    sendIncident(incident, req.headers.host);
+        if (!incidentIsFilled(req.body)) {
+            res.render('declaration_incidents.ejs', { types: data.types, incorrect: true});
+            return;
+        }
 
-    res.render('declaration_incidents.ejs', { types: data.types, incident: incident});
-});
+        const id = data.incidents.length + 1;
 
-function getData(host) {
-    host = getHost(host) + "/data";
+        const incident = {
+            id: id,
+            place: req.body.place,
+            date: req.body.date,
+            type: req.body.type,
+            client: {
+                name: req.body.name,
+                phone: req.body.phone,
+                mail: req.body.mail,
+                comment: req.body.comment
+            }
+        };
     
-    const res = sync_request('get', host);
-    return JSON.parse(res.getBody('utf8'));
-}
+        request.post(host, { json: incident}, (e, r) => {
+            if (e) {
+                res.render('declaration_incidents.ejs', { types: [], error: 'Impossible de créer un incident, veuillez réessayer ultérieurement'});
+                return;
+            }
+
+            res.render('declaration_incidents.ejs', { types: data.types, incident: incident});
+        });        
+    });    
+});
 
 function getHost(host) {
     if (host == 'nfe.fr') {
@@ -70,12 +81,6 @@ function getHost(host) {
     } else {
         return 'https://nfe-backoffice.herokuapp.com';
     }
-}
-
-function sendIncident(incident, host) {
-    host = getHost(host) + "/data";
-    
-    sync_request('post', host, { json: incident});
 }
 
 function incidentIsFilled(body) {

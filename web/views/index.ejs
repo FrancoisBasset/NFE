@@ -15,9 +15,11 @@
             <button class="menu_button" id="declaration_incidents_button">Déclaration d'incidents</button>
         </a>
 
-        <a href="<%= host %>">
-            <button class="menu_button" id="back_office_button">Back office</button>
-        </a>
+        <% if (back_office) { %>
+            <a href="<%= host %>">
+                <button class="menu_button" id="back_office_button">Back office</button>
+            </a>
+        <% } %>
     </div>
 </body>
 
