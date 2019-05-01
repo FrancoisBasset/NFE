@@ -18,33 +18,34 @@ router.get('/:id', (req, res) => {
 });
 
 router.post('/', (req, res) => {
-    if (req.body.add_submit) {
-        data.incidents.push({
-            id: data.incidents.length + 1,
-            name: req.body.name
-        });
-    } else if (req.body.delete_submit) {
+    if (req.body.delete_all_submit) {
         if (req.body.incidents) {
             for (var id of req.body.incidents) {
                 data.incidents = excludeIncident(id);
             }
-        } else {
-            data.incidents = excludeIncident(req.body.id);
+        }
+     }
+     
+     if (req.body.delete_submit) {
+        data.incidents = excludeIncident(req.body.id);
 
-            res.redirect('/incidents');
-            return;
-        }        
-    } else if (req.body.validate_submit) {
+        res.redirect('/incidents');
+        return;
+    }
+    
+    if (req.body.validate_all_submit) {
         if (req.body.incidents) {
             for (var id of req.body.incidents) {
                 validateIncident(id);
             }
-        } else if (req.body.id) {
-            validateIncident(req.body.id);
-
-            res.redirect('/incidents');
-            return;
         }
+    }
+    
+    if (req.body.validate_submit) {
+        validateIncident(req.body.id);
+
+        res.redirect('/incidents');
+        return;
     }
     
     res.redirect('back');
