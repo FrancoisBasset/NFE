@@ -16,14 +16,12 @@
 
     <form method="post" action="/incidents">
         <input type="submit" name="delete_all_submit" value="Supprimer les incidents sélectionnés" class="control_button"/>
-        <input type="submit" name="validate_all_submit" value="Valider les incidents sélectionnés" class="control_button" />
 
         <table border="2">
             <thead>                
                 <tr>
                     <td><input type="checkbox" id="all_checkbox" /></td>
                     <td>ID</td>
-                    <td>Lien</td>
                     <td>Lieu</td>
                     <td>Date</td>                    
                     <td>Type d'incident</td>
@@ -36,48 +34,29 @@
 
             <tbody>
                 <% incidents.forEach((incident) => { %>
-                <tr>
-                    <td>
-                        <input type="checkbox" name="incidents[]" value="<%= incident.id %>" />
-                    </td>
-                    <td><%= incident.id %></td>
-                    <td><a href="/incidents/<%= incident.id %>">Lien de l'incident</a></td>
-                    <td><%= incident.place %></td>
-                    <td><%= incident.date %></td>
-                    <td><%= incident.type %></td>
-                    <td><%= incident.client.name %></td>                    
-                    <td><%= incident.client.phone %></td>
-                    <td><%= incident.client.mail %></td>
-                    <td><%= incident.client.comment %></td>
-                    <td>
-                        <form method="post" action="/incidents">
-                            <input type="submit" name="delete_submit" value="Supprimer l'incident" class="control_button" />                            
-                            <input type="hidden" name="id" value="<%= incident.id %>" />
-                        </form>
-                    </td>
-                    <td>
-                        <form method="post" action="/incidents">
-                            <input type="submit" name="validate_submit" value="Valider l'incident" class="control_button" />                            
-                            <input type="hidden" name="id" value="<%= incident.id %>" />
-                        </form>
-                    </td>
-                </tr>
+                    <tr class="incident_row" data-id="<%= incident.id %>">
+                        <td>
+                            <input type="checkbox" name="incidents[]" value="<%= incident.id %>" />
+                        </td>
+                        <td><%= incident.id %></td>                        
+                        <td><%= incident.place %></td>
+                        <td><%= incident.date %></td>
+                        <td><%= incident.type %></td>
+                        <td><%= incident.client.name %></td>                    
+                        <td><%= incident.client.phone %></td>
+                        <td><%= incident.client.mail %></td>
+                        <td><%= incident.client.comment %></td>
+                        <td>
+                            <form method="post" action="/incidents">
+                                <input type="submit" name="delete_submit" value="Supprimer l'incident" class="control_button" />                            
+                                <input type="hidden" name="id" value="<%= incident.id %>" />
+                            </form>
+                        </td>                        
+                    </tr>                
                 <% }) %>
             </tbody>
         </table>
     </form>
 </body>
 
-<script>
-    document.getElementById('all_checkbox').addEventListener('click', function() {
-        if (this.checked) {
-            document.getElementsByName('incidents[]').forEach((checkbox) => {
-                checkbox.setAttribute('checked', 'checked');
-            });
-        } else {
-            document.getElementsByName('incidents[]').forEach((checkbox) => {
-                checkbox.removeAttribute('checked');
-            });
-        }
-    });
-</script>
+<script src="js/incidents/index.js"></script>
