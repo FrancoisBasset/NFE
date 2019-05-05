@@ -13,7 +13,7 @@ data.incidents = [
   {
     id: 1,
     place: "Republique",
-    date: "24/04/2019",
+    date: "2019-05-05",
     type: "panne",
     client: {
       name: "Jean",
@@ -25,7 +25,7 @@ data.incidents = [
   {
     id: 2,
     place: "Romorantin",
-    date: "24/04/2019",
+    date: "2019-05-05",
     type: "panne",
     client: {
       name: "Jacques",
@@ -37,7 +37,7 @@ data.incidents = [
   {
     id: 3,
     place: "Saint-Gervais",
-    date: "24/04/2019",
+    date: "2019-05-05",
     type: "panne",
     client: {
       name: "René",
@@ -50,7 +50,7 @@ data.incidents = [
   {
     id: 4,
     place: "Menton",
-    date: "24/04/2019",
+    date: "2019-05-05",
     type: "panne",
     client: {
       name: "Edouard",
@@ -62,7 +62,7 @@ data.incidents = [
   {
     id: 5,
     place: "Saint-Benoit",
-    date: "24/04/2019",
+    date: "2019-05-05",
     type: "panne",
     client: {
       name: "Philippe",
@@ -74,7 +74,7 @@ data.incidents = [
   {
     id: 6,
     place: "Strasbourg",
-    date: "24/04/2019",
+    date: "2019-05-05",
     type: "panne",
     client: {
       name: "Pierre",
@@ -87,7 +87,7 @@ data.incidents = [
   {
     id: 7,
     place: "Metz",
-    date: "24/04/2019",
+    date: "2019-05-05",
     type: "panne",
     client: {
       name: "Denis",
@@ -99,7 +99,7 @@ data.incidents = [
   {
     id: 8,
     place: "Saint-Moret",
-    date: "24/04/2019",
+    date: "2019-05-05",
     type: "panne",
     client: {
       name: "Marcel",
@@ -111,7 +111,7 @@ data.incidents = [
   {
     id: 9,
     place: "Reims",
-    date: "24/04/2019",
+    date: "2019-05-05",
     type: "panne",
     client: {
       name: "Vladimir",

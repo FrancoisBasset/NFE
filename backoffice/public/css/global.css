@@ -6,10 +6,18 @@ header, body {
     text-align: center;
 }
 
-table {
-    
+button:hover {
+    cursor: pointer;
 }
 
-button:hover, input[type=submit] {
+input {
+    cursor: pointer;
+}
+
+select:hover {
+    cursor: pointer;
+}
+
+textarea:hover {
     cursor: pointer;
 }

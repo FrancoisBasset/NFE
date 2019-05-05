@@ -3,7 +3,7 @@
 
 <head>
     <title>Back office NFE - Incidents</title>
-    <link rel="stylesheet" href="css/shared.css" />
+    <link rel="stylesheet" href="css/global.css" />
     <link rel="stylesheet" href="css/incidents.css" />
 </head>
 
@@ -14,8 +14,8 @@
 
     <h2>Liste des incidents</h2>
 
-    <form method="post" action="/incidents">
-        <input type="submit" name="delete_all_submit" value="Supprimer les incidents sélectionnés" class="control_button"/>
+    <form method="post">
+        <input type="submit" name="delete_all" value="Supprimer les incidents sélectionnés" class="control_button"/>
 
         <table border="2">
             <thead>                
@@ -23,7 +23,7 @@
                     <td><input type="checkbox" id="all_checkbox" /></td>
                     <td>ID</td>
                     <td>Lieu</td>
-                    <td>Date</td>                    
+                    <td>Date d'apparition</td>                    
                     <td>Type d'incident</td>
                     <td>Nom du client</td>
                     <td>Numéro de téléphone</td>
@@ -33,7 +33,7 @@
             </thead>
 
             <tbody>
-                <% incidents.forEach((incident) => { %>
+                <% incidents.forEach(incident => { %>
                     <tr class="incident_row" data-id="<%= incident.id %>">
                         <td>
                             <input type="checkbox" name="incidents[]" value="<%= incident.id %>" />
@@ -47,8 +47,8 @@
                         <td><%= incident.client.mail %></td>
                         <td><%= incident.client.comment %></td>
                         <td>
-                            <form method="post" action="/incidents">
-                                <input type="submit" name="delete_submit" value="Supprimer l'incident" class="control_button" />                            
+                            <form method="post">
+                                <input type="submit" name="delete" value="Supprimer l'incident" class="control_button" />                            
                                 <input type="hidden" name="id" value="<%= incident.id %>" />
                             </form>
                         </td>                        

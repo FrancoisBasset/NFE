@@ -2,24 +2,103 @@
 <html>
 
 <head>
-    <title>Back office NFE - Incident <%= incident.id %></title>
-    <link rel="stylesheet" href="css/shared.css" />
+    <title>Back office NFE - Incident n°<%= incident.id %></title>
+    <link rel="stylesheet" href="css/global.css" />
+    <link rel="stylesheet" href="css/form.css" />
+    <link rel="stylesheet" href="css/incident.css" />
 </head>
 
 <%- include("../header"); %>
 
 <body>
-    <h1>Le nom de l'incident est <%= incident.id %></h1>
+    <h1 class="title">Incident n°<%= incident.id %></h1>
 
-    <form method="post" action="/incidents">
-        <input type="submit" name="delete_submit" value="Supprimer l'incident" />
-        <input type="hidden" name="id" value="<%= incident.id %>" />
-    </form>
+    <form method="post" class="form">
+        <div class="form-line">
+            <label class="form-label">ID :</label>
+            <input type="text" value="<%= incident.id %>" readonly class="form-input" /><br>
+        </div>
 
-    <form method="post" action="/incidents">
-        <input type="submit" name="validate_submit" value="Valider l'incident" />
+        <div class="form-line">
+            <label class="form-label">Lieu :</label>
+            <input type="text" name="place" value="<%= incident.place %>" class="form-input" /><br>
+        </div>
+
+        <div class="form-line">
+            <label class="form-label">Date d'apparition :</label>
+            <input type="date" name="date" value="<%= incident.date %>" class="form-input" /><br>
+        </div>
+
+        <div class="form-line">
+            <label class="form-label">Type d'incident :</label>
+            <select name="type" class="form-input">
+                <option><%= incident.type %></option>
+            </select><br>
+        </div>
+
+        <div class="form-line">
+            <label class="form-label">Nom du client :</label>
+            <input type="name" name="name" value="<%= incident.client.name %>" class="form-input" /><br>
+        </div>
+
+        <div class="form-line">
+            <label class="form-label">Numéro de téléphone :</label>
+            <input type="text" name="phone" value="<%= incident.client.phone %>" class="form-input" /><br>
+        </div>
+
+        <div class="form-line">
+            <label class="form-label">Adresse mail :</label>
+            <input type="email" name="mail" value="<%= incident.client.mail %>" class="form-input" /><br>
+        </div>
+
+        <div class="form-line">
+            <label class="form-label">Commentaire :</label>
+            <textarea name="comment" class="form-input"><%= incident.client.comment %></textarea><br><br><br>
+        </div>
+
+        <input type="submit" name="modify" id="modify" value="Modifier l'incident" />
+        <input type="submit" name="delete" id="delete" value="Supprimer l'incident" /><br><br><br>
+
+        <h1 class="title">Valider l'incident</h1>
+
+        <div class="form-line">
+            <label class="form-label">Matériel nécessaire :</label>
+            <select name="hardware[]" class="form-input">
+                <option name="">ok</option>
+            </select><br>
+        </div>
+
+        <div class="form-line">
+            <label class="form-label">Urgence :</label>
+            <select name="urgence" class="form-input">
+                <option name="low">Faible</option>
+                <option name="medium">Moyen</option>
+                <option name="high">Fort</option>
+            </select><br>
+        </div>
+
+        <div class="form-line">
+            <label class="form-label">Date de début :</label>
+            <input type="date" class="form-input"/><br>
+        </div>
+
+        <div class="form-line">
+            <label class="form-label">Date de fin :</label>
+            <input type="date" class="form-input"/><br>
+        </div>
+
+        <div class="form-line">
+            <label class="form-label">Agents :</label>
+            <select name="agents[]" class="form-input">
+                <option>Jean</option>
+                <option>Benoit</option>
+            </select><br><br>
+        </div>
+
+        <input type="submit" name="validate" value="Valider l'incident" />
+
         <input type="hidden" name="id" value="<%= incident.id %>" />
-    </form>
+    </form> 
 </body>
 
 </html>

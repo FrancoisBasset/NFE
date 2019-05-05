@@ -3,7 +3,7 @@
 
 <head>
     <title>Back office NFE - Interventions</title>
-    <link rel="stylesheet" href="css/shared.css" />
+    <link rel="stylesheet" href="css/global.css" />
 </head>
 
 <%- include("../header"); %>
@@ -24,7 +24,7 @@
         </thead>
 
         <tbody>
-            <% interventions.forEach((intervention) => { %>
+            <% interventions.forEach(intervention => { %>
             <tr>
                 <td><%= intervention.id %></td>
                 <td><%= intervention.place %></td>
