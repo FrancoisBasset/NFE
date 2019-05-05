@@ -29,7 +29,7 @@ router.post('/', (req, res) => {
         }
 
         if (!global.incidentIsFilled(req.body)) {
-            res.render('declaration_incidents.ejs', { types: data.types, incorrect: true});
+            res.render('declaration_incidents.ejs', { types: data.types, error: 'Le formulaire n\'a pas été correctement renseigné'});
             return;
         }
 

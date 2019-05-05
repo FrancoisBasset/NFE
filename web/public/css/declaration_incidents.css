@@ -1,4 +1,4 @@
-#report_incident_input {
+#declare_incident {
     position: relative;
     top: 10px;
 
@@ -13,25 +13,21 @@
     border: none;
 }
 
-.confirmation_div {
+.success, .error {
     text-align: center;
     width: 60%;
 
     margin-left: auto;
     margin-right: auto;
 
-    background-color: limegreen;
     color: white;
+}
+
+.success { 
+    background-color: limegreen;
     font-size: 20px;
 }
 
-.error_div {
-    text-align: center;
-    width: 60%;
-
-    margin-left: auto;
-    margin-right: auto;
-
+.error {
     background-color: red;
-    color: white;
 }
