@@ -17,3 +17,7 @@ select:hover {
 button:hover {
     cursor: pointer;
 }
+
+.title {
+    text-align: center;
+}

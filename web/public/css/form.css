@@ -1,0 +1,19 @@
+.form {
+    position: relative;
+    text-align: center;   
+}
+
+.form-line {
+    margin-bottom: 20px;   
+}
+
+.form-label {
+    position: absolute;
+    left: 20%;
+}
+
+.form-input {
+    position: absolute;
+    left: 40%;
+    width: 40%;
+}
