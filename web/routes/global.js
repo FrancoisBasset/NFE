@@ -15,8 +15,7 @@ global.incidentIsFilled = body => {
         body.type.trim() == '' ||
         body.name.trim() == '' ||
         body.phone.trim() == '' || isNaN(body.phone.trim()) || body.phone.length != 10 ||
-        body.mail.trim() == '' ||
-        body.comment.trim() == ''
+        body.mail.trim() == ''
     ) {
         return false;
     }

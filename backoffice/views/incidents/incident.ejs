@@ -57,7 +57,19 @@
         </div>
 
         <input type="submit" name="modify" id="modify" value="Modifier l'incident" />
-        <input type="submit" name="delete" id="delete" value="Supprimer l'incident" /><br><br><br>
+        <input type="submit" name="delete" id="delete" value="Supprimer l'incident" />
+
+        <% if (locals.success) { %>
+            <div class="success">
+                <h1><%= success %></h1>
+            </div>
+        <% } %>
+
+        <% if (locals.error) { %>
+            <div class="error">
+                <h1><%= error %></h1>
+            </div>
+        <% } %>
 
         <h1 class="title">Valider l'incident</h1>
 

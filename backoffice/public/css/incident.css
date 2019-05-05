@@ -5,3 +5,21 @@
 #delete {
     width: 30%;
 }
+
+.success, .error {
+    text-align: center;
+    width: 60%;
+
+    margin-left: auto;
+    margin-right: auto;
+
+    color: white;
+}
+
+.success { 
+    background-color: limegreen;
+}
+
+.error {
+    background-color: red;
+}
