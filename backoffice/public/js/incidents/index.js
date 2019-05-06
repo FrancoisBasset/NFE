@@ -1,13 +1,7 @@
-document.getElementById('all_checkbox').addEventListener('click', () => {
-    if (this.checked) {
-        document.getElementsByName('incidents[]').forEach(checkbox => {
-            checkbox.checked = true;            
-        });
-    } else {
-        document.getElementsByName('incidents[]').forEach(checkbox => {
-            checkbox.checked = false;
-        });
-    }
+document.getElementById('all_checkbox').addEventListener('click', all_checkbox => {
+    document.getElementsByName('incidents[]').forEach(checkbox => {
+        checkbox.checked = all_checkbox.target.checked;            
+    });
 });
 
 for (var row of document.getElementsByClassName('incident_row')) {
