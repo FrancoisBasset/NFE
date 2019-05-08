@@ -33,10 +33,7 @@ router.post('/', (req, res) => {
             return;
         }
 
-        const id = data.incidents.length + 1;
-
         const incident = {
-            id: id,
             place: req.body.place,
             date: req.body.date,
             type: req.body.type,

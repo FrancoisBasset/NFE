@@ -56,61 +56,118 @@
             <textarea name="comment" class="form-input"><%= incident.client.comment %></textarea><br><br><br>
         </div>
 
-        <input type="submit" name="modify" id="modify" value="Modifier l'incident" />
-        <input type="submit" name="delete" id="delete" value="Supprimer l'incident" />
+        <div class="form-line">
+            <label class="form-label">Validé :</label>
+            <% if (incident.validated == true) { %>
+                <div class="form-input validated"></div>
+            <% } else { %>
+                <div class="form-input notvalidated"></div>
+            <% } %><br>
+        </div>
 
-        <% if (locals.success) { %>
-            <div class="success">
-                <h1><%= success %></h1>
+        <% if (!incident.validated) { %>
+            <input type="submit" name="modify" id="modify" value="Modifier l'incident" />
+            <input type="submit" name="delete" id="delete" value="Supprimer l'incident" />
+
+            <h1 class="title">Valider l'incident</h1>
+
+            <div class="form-line">
+                <button type="button" id="moreHardware">Plus de matériels</button>
             </div>
-        <% } %>
 
-        <% if (locals.error) { %>
-            <div class="error">
-                <h1><%= error %></h1>
+            <div class="form-line">
+                <label class="form-label">Matériel nécessaire :</label>
+                <select name="hardwares[]" class="form-input">
+                    <% hardwares.forEach(hardware => { %>
+                        <option name="<%= hardware.name %>"><%= hardware.text %></option>
+                    <% }); %>
+                </select><br>
             </div>
+            
+            <div class="form-line">
+                <label class="form-label">Priorité :</label>
+                <select name="priority" class="form-input">
+                    <option name="low">Faible</option>
+                    <option name="medium">Moyenne</option>
+                    <option name="high">Haute</option>
+                </select><br>
+            </div>
+
+            <div class="form-line">
+                <label class="form-label">Date de début :</label>
+                <input type="date" name="beginning_date" value="2019-05-08" class="form-input"/><br>
+            </div>
+
+            <div class="form-line">
+                <label class="form-label">Date de fin :</label>
+                <input type="date" name="end_date" value="2019-05-08" class="form-input"/><br>
+            </div>
+
+            <div class="form-line">
+                <label class="form-label">Agents :</label>
+                <select name="agents[]" class="form-input">
+                    <option>Jean</option>
+                    <option>Benoit</option>
+                </select><br>
+            </div>
+
+            <input type="submit" name="validate" value="Valider l'incident" />
         <% } %>
-
-        <h1 class="title">Valider l'incident</h1>
-
-        <div class="form-line">
-            <label class="form-label">Matériel nécessaire :</label>
-            <select name="hardware[]" class="form-input">
-                <option name="">ok</option>
-            </select><br>
-        </div>
-
-        <div class="form-line">
-            <label class="form-label">Urgence :</label>
-            <select name="urgence" class="form-input">
-                <option name="low">Faible</option>
-                <option name="medium">Moyen</option>
-                <option name="high">Fort</option>
-            </select><br>
-        </div>
-
-        <div class="form-line">
-            <label class="form-label">Date de début :</label>
-            <input type="date" class="form-input"/><br>
-        </div>
-
-        <div class="form-line">
-            <label class="form-label">Date de fin :</label>
-            <input type="date" class="form-input"/><br>
-        </div>
-
-        <div class="form-line">
-            <label class="form-label">Agents :</label>
-            <select name="agents[]" class="form-input">
-                <option>Jean</option>
-                <option>Benoit</option>
-            </select><br><br>
-        </div>
-
-        <input type="submit" name="validate" value="Valider l'incident" />
 
         <input type="hidden" name="id" value="<%= incident.id %>" />
-    </form> 
+    </form>
+
+    <% if (locals.success) { %>
+        <div class="success">
+            <h1><%= success %></h1>
+        </div>
+    <% } %>
+
+    <% if (locals.error) { %>
+        <div class="error">
+            <h1><%= error %></h1>
+        </div>
+    <% } %>
 </body>
 
 </html>
+
+<script>    
+    var original_to_dup = document.getElementsByName('hardwares[]')[0].parentElement;
+
+    var moreHardware = document.getElementById('moreHardware');
+    var lessHardware = document.createElement('button');
+    lessHardware.type = 'button';
+    lessHardware.textContent = 'Moins de matériels';
+
+    var count = document.getElementsByName('hardwares[]')[0].options.length;
+
+    lessHardware.addEventListener('click', () => {
+        var lines = document.getElementsByName('hardwares[]');
+
+        lines[lines.length - 1].parentElement.remove();
+
+        if (document.getElementsByName('hardwares[]').length == 1) {
+            lessHardware.remove();
+        } else {
+            lessHardware.before(moreHardware);
+        }
+    });
+
+    document.getElementById('moreHardware').addEventListener('click', (e) => {
+        if (document.getElementsByName('hardwares[]').length == 1) {
+            moreHardware.after(lessHardware);
+        }
+
+        if (document.getElementsByName('hardwares[]').length < count) {
+            var dup = original_to_dup.cloneNode(true);
+            dup.removeChild(dup.children[0]);   
+
+            original_to_dup.after(dup);
+        } 
+        
+        if (document.getElementsByName('hardwares[]').length >= count) {
+            moreHardware.remove();
+        }
+    });
+</script>

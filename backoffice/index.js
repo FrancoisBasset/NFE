@@ -53,6 +53,9 @@ app.get('/data', (req, res) => {
 });
 
 app.post('/data', (req, res) => {
+    req.body.id = data.incidentsIDs;
+    data.incidentsIDs++;
+
     data.incidents.push(req.body);
     res.status(201).end();
 });

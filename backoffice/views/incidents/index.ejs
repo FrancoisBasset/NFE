@@ -4,23 +4,28 @@
 <head>
     <title>Back office NFE - Incidents</title>
     <link rel="stylesheet" href="css/global.css" />
+    <link rel="stylesheet" href="css/table.css" />
     <link rel="stylesheet" href="css/incidents.css" />
 </head>
 
 <%- include("../header"); %>
 
 <body>
-    <h1 class="title">Incidents</h1>
-
-    <h2>Liste des incidents</h2>
+    <h1 class="title">Liste des incidents</h1>
 
     <form method="post">
-        <input type="submit" name="delete_all" value="Supprimer les incidents sélectionnés" class="control_button"/>
+        
 
-        <table border="2">
-            <thead>                
+        <table id="incidents">
+            <thead>
                 <tr>
-                    <td><input type="checkbox" id="all_checkbox" /></td>
+                    <td colspan="11">
+                        <input type="submit" name="delete_all" value="Supprimer les incidents sélectionnés" class="control-button"/>
+                    </td>
+                </tr>
+
+                <tr>
+                    <td><input type="checkbox" id="all_incidents" /></td>
                     <td>ID</td>
                     <td>Lieu</td>
                     <td>Date d'apparition</td>                    
@@ -29,6 +34,8 @@
                     <td>Numéro de téléphone</td>
                     <td>Adresse mail</td>
                     <td>Commentaire</td>
+                    <td>Validé</td>
+                    <td>Bouton de suppression</td>
                 </tr>
             </thead>
 
@@ -46,12 +53,19 @@
                         <td><%= incident.client.phone %></td>
                         <td><%= incident.client.mail %></td>
                         <td><%= incident.client.comment %></td>
-                        <td>
-                            <form method="post">
-                                <input type="submit" name="delete" value="Supprimer l'incident" class="control_button" />                            
-                                <input type="hidden" name="id" value="<%= incident.id %>" />
-                            </form>
-                        </td>                        
+                        <% if (incident.validated) { %>
+                            <td class="validated"></td>
+                        <% } else { %>
+                            <td class="notvalidated"></td>
+                        <% } %>
+                        <% if (!incident.validated) { %>
+                            <td>  
+                                <form method="post">
+                                    <input type="submit" name="delete" value="Supprimer l'incident" class="control-button" />                            
+                                    <input type="hidden" name="id" value="<%= incident.id %>" />
+                                </form>
+                            </td>
+                        <% } %>
                     </tr>                
                 <% }) %>
             </tbody>
@@ -60,3 +74,6 @@
 </body>
 
 <script src="js/incidents/index.js"></script>
+<script src="js/table.js"></script>
+
+</html>

@@ -21,3 +21,7 @@ select:hover {
 textarea:hover {
     cursor: pointer;
 }
+
+td:hover {
+    cursor: pointer;
+}

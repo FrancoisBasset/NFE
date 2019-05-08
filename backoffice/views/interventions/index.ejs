@@ -4,40 +4,63 @@
 <head>
     <title>Back office NFE - Interventions</title>
     <link rel="stylesheet" href="css/global.css" />
+    <link rel="stylesheet" href="css/table.css" />
 </head>
 
 <%- include("../header"); %>
 
 <body>
-    <h1 class="title">Interventions</h1>
+    <h1 class="title">Liste des interventions</h1>
 
-    <table border="2">
+    <table id="interventions">
         <thead>
-            <td>ID</td>
-            <td>Place</td>
-            <td>Date</td>
-            <td>Type d'intervention</td>
-            <td>Nom du client</td>            
-            <td>Numéro de téléphone</td>
-            <td>Adresse mail</td>
-            <td>Commentaire</td>
+            <tr>
+                <td colspan="9">
+                    <input type="submit" name="delete_all" value="Supprimer les interventions sélectionnées" class="control-button"/>
+                </td>
+            </tr>
+            <tr>
+                <td><input type="checkbox" id="all_interventions" /></td>
+                <td>ID</td>
+                <td>Lieu</td>
+                <td>Type d'intervention</td>
+                <td>Commentaire</td>
+                <td>Date de début</td>
+                <td>Date de fin</td>
+                <td>Cloturé</td>
+                <td>Bouton de suppression</td>
+            </tr>
         </thead>
 
         <tbody>
             <% interventions.forEach(intervention => { %>
-            <tr>
-                <td><%= intervention.id %></td>
-                <td><%= intervention.place %></td>
-                <td><%= intervention.date %></td>
-                <td><%= intervention.type %></td>
-                <td><%= intervention.client.name %></td>                
-                <td><%= intervention.client.phone %></td>
-                <td><%= intervention.client.mail %></td>
-                <td><%= intervention.client.comment %></td>
-            </tr>
+                <tr class="intervention_row" data-id="<%= intervention.id %>">
+                    <td>
+                        <input type="checkbox" name="interventions[]" value="<%= intervention.id %>" />
+                    </td>
+                    <td><%= intervention.id %></td>
+                    <td><%= intervention.incident.place %></td>
+                    <td><%= intervention.incident.type %></td>
+                    <td><%= intervention.incident.client.comment %></td>
+                    <td><%= intervention.beginning_date %></td>
+                    <td><%= intervention.end_date %></td>
+                    <% if (intervention.enclosed) { %>
+                        <td class="enclosed"></td>
+                    <% } else { %>
+                        <td class="notenclosed"></td>
+                    <% } %>
+                    <td>
+                        <form method="post">
+                            <input type="submit" name="delete" value="Supprimer l'intervention" class="control-button" />                            
+                            <input type="hidden" name="id" value="<%= intervention.id %>" />
+                        </form>
+                    </td>
+                </tr>
             <% }); %>
         </tbody>
     </table>
 </body>
+
+<script src="js/table.js"></script>
 
 </html>
