@@ -1,6 +1,6 @@
 var global = {}
 
-var data = require('../../Data');
+var data = require('../../utils/Data');
 
 global.data = data;
 

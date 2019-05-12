@@ -1,6 +1,9 @@
-const express = require('express')
+const express = require('express');
 const router = express.Router();
-var data = require('../../Data');
+
+router.use(require('../../utils/checkConnection'));
+
+var data = require('../../utils/Data');
 
 router.get('/', (req, res) => {
     res.render('interventions/index.ejs', { interventions: data.interventions });

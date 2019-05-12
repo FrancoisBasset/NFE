@@ -16,15 +16,21 @@
     <form method="post" action="/login" class="form">
         <div class="form-line">
             <label class="form-label" for="id">Identifiant NFEID :</label>
-            <input type="text" name="id" class="form-input" value="a" /><br>
+            <input type="text" name="id" class="form-input" value="<%= locals.id ? id : '' %>"/><br>
         </div>
 
         <div class="form-line">
             <label class="form-label" for="password">Mot de passe :</label>
-            <input type="password" name="password" class="form-input" value="a" /><br>
+            <input type="password" name="password" class="form-input" value="<%= locals.password ? password : '' %>"/><br>
         </div>
 
-        <input type="submit" name="login" id="login" value="Se connecter" />
+        <input type="submit" name="login" id="login" value="Se connecter" /><br><br><br>
+
+        <% if (locals.error) { %>
+            <div id="error">
+                <h1><%= error %></h1>
+            </div>
+        <% } %>
     </form>
 </body>
 
