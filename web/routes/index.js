@@ -1,7 +1,7 @@
 const express = require('express');
 const router = express.Router();
 const request = require('request');
-const global = require('./global');
+const global = require('../utils/global');
 
 router.use('/', express.static('./public'));
 router.use('/declaration_incidents', require('./declaration_incidents'));

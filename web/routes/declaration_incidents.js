@@ -1,7 +1,7 @@
 const express = require('express');
 const router = express.Router();
 const request = require('request');
-const global = require('./global');
+const global = require('../utils/global');
 const bodyParser = require('body-parser');
 
 router.use(bodyParser.json());
@@ -23,16 +23,6 @@ router.post('/', (req, res) => {
     const host = global.getHost(req.headers.host) + "/data";
 
     request.get(host, { json: true}, (e, r, data) => {
-        if (e) {
-            res.render('declaration_incidents.ejs', { types: [], error: 'Impossible de créer un incident, veuillez réessayer ultérieurement'});
-            return;
-        }
-
-        if (!global.incidentIsFilled(req.body)) {
-            res.render('declaration_incidents.ejs', { types: data.types, error: 'Le formulaire n\'a pas été correctement renseigné'});
-            return;
-        }
-
         const incident = {
             place: req.body.place,
             date: req.body.date,
@@ -44,10 +34,20 @@ router.post('/', (req, res) => {
                 comment: req.body.comment
             }
         };
+
+        if (e) {
+            res.render('declaration_incidents.ejs', { types: [], incident: incident, error: 'Impossible de créer un incident, veuillez réessayer ultérieurement'});
+            return;
+        }
+
+        if (!global.incidentIsFilled(req.body)) {
+            res.render('declaration_incidents.ejs', { types: data.types, incident: incident, error: 'Le formulaire n\'a pas été correctement renseigné'});
+            return;
+        }
     
         request.post(host, { json: incident}, (e, r) => {
             if (e) {
-                res.render('declaration_incidents.ejs', { types: [], error: 'Impossible de créer un incident, veuillez réessayer ultérieurement'});
+                res.render('declaration_incidents.ejs', { types: [], incident: incident, error: 'Impossible de créer un incident, veuillez réessayer ultérieurement'});
             } else {
                 res.render('declaration_incidents.ejs', { types: data.types, incident: incident});
             }

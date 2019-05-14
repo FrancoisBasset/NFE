@@ -1,7 +1,7 @@
 const express = require('express');
 const app = express();
 
-require('./sentry')(app);
+require('./utils/sentry')(app);
 
 app.listen(process.env.PORT || 80, () => {
     console.log('Web started on port 80');

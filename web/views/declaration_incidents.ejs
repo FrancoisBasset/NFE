@@ -16,41 +16,41 @@
     <form method="post" class="form">
         <div class="form-line">
             <label class="form-label" for="place">Lieu de l'incident :</label>
-            <input type="text" name="place" id="place" class="form-input" /><br>
+            <input type="text" name="place" id="place" class="form-input" value="<%= locals.incident ? incident.place : '' %>" /><br>
         </div>
 
         <div class="form-line">
             <label class="form-label" for="incident_date">Date d'apparition :</label>
-            <input type="date" name="date" id="date" class="form-input" /><br>
+            <input type="date" name="date" id="date" class="form-input" value="<%= locals.incident ? incident.date : '' %>" /><br>
         </div>        
 
         <div class="form-line">
             <label class="form-label" for="incident_type">Type d'incident :</label>
             <select name="type" id="type" class="form-input">
                 <% types.forEach(type => { %>
-                    <option value="<%= type.name %>"><%= type.text %></option>
+                    <option value="<%= type.name %>" <% if (locals.incident && type.name == incident.type) { %> selected="selected" <% } %>><%= type.text %></option>
                 <% }); %>
             </select><br>
         </div>
 
         <div class="form-line">
             <label class="form-label" for="client_name">Nom du client :</label>
-            <input type="text" name="name" id="name" class="form-input" /><br>
+            <input type="text" name="name" id="name" class="form-input" value="<%= locals.incident ? incident.client.name : '' %>" /><br>
         </div>
 
         <div class="form-line">
             <label class="form-label" for="phone">Numéro de téléphone :</label>
-            <input type="text" name="phone" id="phone" class="form-input" /><br>
+            <input type="text" name="phone" id="phone" class="form-input" value="<%= locals.incident ? incident.client.phone : '' %>" /><br>
         </div>
 
         <div class="form-line">
             <label class="form-label" for="mail">Adresse mail :</label>
-            <input type="email" name="mail" id="mail" class="form-input" /><br>
+            <input type="email" name="mail" id="mail" class="form-input" value="<%= locals.incident ? incident.client.mail : '' %>" /><br>
         </div>
 
         <div class="form-line">
             <label class="form-label" for="comment">Commentaire :</label>
-            <textarea name="comment" id="comment" class="form-input"></textarea><br><br>
+            <textarea name="comment" id="comment" class="form-input"><%= locals.incident ? incident.client.comment : '' %></textarea><br><br>
         </div>
 
         <input type="submit" id="declare_incident" value="Déclarer l'incident" />
@@ -62,7 +62,7 @@
         </div>
     <% } %>
     
-    <% if (locals.incident) { %>
+    <% if (locals.incident && !locals.error) { %>
         <div class="success">
             <p>L'incident a bien été créé avec ces informations :</p>
 

@@ -18,6 +18,10 @@ app.use('/holidays', require('./routes/holidays'));
 
 var data = require('./utils/Data');
 
+const bodyParser = require('body-parser');
+app.use(bodyParser.json());
+app.use(bodyParser.urlencoded({ extended: true }));
+
 app.get('/data', (req, res) => {
     res.json(data);
 });
