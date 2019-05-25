@@ -22,18 +22,19 @@ router.get('/', (req, res) => {
             'Commentaire',
             'Validé',
             'Bouton de suppression'
-        ]
+        ],
+        action: 'Supprimer'
     });
 });
 
 router.post('/', (req, res) => {
-    if (req.body.delete_all) {
+    if (req.body.action_all) {
         if (req.body.elements) {
             Global.IncidentHelper.DeleteAll(req.body.elements);
         }
     }
      
-    if (req.body.delete) {
+    if (req.body.action) {
         Global.IncidentHelper.Delete(req.body.id);
     }    
     

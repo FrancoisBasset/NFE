@@ -32,21 +32,22 @@ router.get('/', (req, res) => {
             'Commentaire',
             'Date de début',
             'Date de fin',
-            'Cloturé',
-            'Bouton de suppression'
-        ]
+            'Clôturé',
+            'Bouton de clôturation'
+        ],
+        action: 'Clôturer'
     });
 });
 
 router.post('/', (req, res) => {
-    if (req.body.delete_all) {
+    if (req.body.action_all) {
         if (req.body.elements) {
-            Global.InterventionHelper.DeleteAll(req.body.elements);
+            Global.InterventionHelper.CloseAll(req.body.elements);
         }
     }
 
-    if (req.body.delete) {
-        Global.InterventionHelper.Delete(req.body.id);
+    if (req.body.action) {
+        Global.InterventionHelper.Close(req.body.id);
     }
 
     res.redirect('back');

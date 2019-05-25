@@ -23,6 +23,7 @@ module.exports = {
         intervention.beginning_date = body.beginning_date;
         intervention.end_date = body.end_date;
         intervention.agents = body.agents;
+        intervention.done = false;
 
         Helper.Add('interventions', intervention);
     },
@@ -40,11 +41,13 @@ module.exports = {
         return true;
     },
 
-    Delete: id => {
-        Helper.Delete('interventions', id);
+    Close: id => {
+        module.exports.GetById(id).done = true;
     },
 
-    DeleteAll: ids => {
-        Helper.DeleteAll('interventions', ids);
+    CloseAll: ids => {
+        for (var id of ids) {
+            module.exports.Close(id);
+        }
     }
 };

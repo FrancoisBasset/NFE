@@ -17,7 +17,7 @@
             <thead>
                 <tr>
                     <td colspan="11">
-                        <input type="submit" name="delete_all" value="Supprimer les <%= resources_type %>s sélectionnés" class="control-button"/>
+                        <input type="submit" name="action_all" value="<%= action %> les <%= resources_type %>s sélectionnés" class="control-button"/>
                     </td>
                 </tr>
 
@@ -59,7 +59,7 @@
                         <% if (!element.done) { %>
                             <td>  
                                 <form method="post">
-                                    <input type="submit" name="delete" value="Supprimer l'<%= resources_type %>" class="control-button" />                            
+                                    <input type="submit" name="action" value="<%= action %> l'<%= resources_type %>" class="control-button" />                            
                                     <input type="hidden" name="id" value="<%= element.id %>" />
                                 </form>
                             </td>
