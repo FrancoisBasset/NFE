@@ -1,27 +1,40 @@
-const express = require('express');
-const router = express.Router({ mergeParams: true });
+const router = require('express').Router();
+const bodyParser = require('body-parser');
+const Global = require('../../utils/global');
 
-router.use(require('../../utils/checkConnection'));
-
+//router.use(require('../../utils/checkConnection'));
 router.use('/:id', require('./incident'));
-
-const global = require('./global');
+router.use(bodyParser.json());
+router.use(bodyParser.urlencoded({ extended: true }));
 
 router.get('/', (req, res) => {
-    res.render('incidents/index.ejs', { incidents: global.data.incidents});
+    res.render('table.ejs', {
+        resources_type: 'incident',
+        elements: Global.IncidentHelper.GetAll(),
+        columns: [
+            'ID',
+            'Lieu',
+            'Date d\'apparition',
+            'Type d\'incident',
+            'Nom du client',
+            'Numéro de téléphone',
+            'Adresse mail',
+            'Commentaire',
+            'Validé',
+            'Bouton de suppression'
+        ]
+    });
 });
 
 router.post('/', (req, res) => {
     if (req.body.delete_all) {
-        if (req.body.incidents) {
-            for (var id of req.body.incidents) {
-                global.removeIncident(id);
-            }
+        if (req.body.elements) {
+            Global.IncidentHelper.DeleteAll(req.body.elements);
         }
     }
      
     if (req.body.delete) {
-        global.removeIncident(req.body.id);
+        Global.IncidentHelper.Delete(req.body.id);
     }    
     
     res.redirect('back');

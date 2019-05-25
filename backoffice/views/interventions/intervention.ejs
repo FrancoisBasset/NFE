@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html>
+    
+<head>
+    <title>Back office NFE - Intervention n°<%= intervention.id %></title>
+    <link rel="stylesheet" href="css/global.css" />
+    <link rel="stylesheet" href="css/form.css" />
+    <link rel="stylesheet" href="css/detail.css" />
+</head>
+
+<%- include("../header"); %>
+
+<body>
+    <h1 class="title">Intervention n°<%= intervention.id %></h1>
+
+    <form class="form">
+        <div class="form-line">
+            <label class="form-label">Incident :</label>
+            <a href="/incidents/<%= intervention.incident.id %>" class="form-input">/incidents/<%= intervention.incident.id %></a><br>
+        </div>
+
+        <div class="form-line">
+            <label class="form-label">Lieu :</label>
+            <input type="text" class="form-input" value="<%= locals.intervention ? intervention.incident.place : '' %>"/><br>
+        </div>
+
+        <div class="form-line">
+            <label class="form-label">Type d'intervention</label>
+            <select class="form-input">
+                <% types.forEach(type => { %>
+                    <option value="<%= type.name %>" <% if (locals.intervention && type.name == intervention.type) { %> selected="selected" <% } %>><%= type.text %></option>
+                <% }); %>
+            </select><br>
+        </div>
+
+        <div class="form-line">
+            <label class="form-label">Date de début :</label>
+            <input type="date" class="form-input" value="<%= locals.intervention ? intervention.beginning_date : '' %>" /><br>
+        </div>
+
+        <div class="form-line">
+            <label class="form-label">Date de fin :</label>
+            <input type="date" class="form-input" value="<%= locals.intervention ? intervention.end_date : '' %>" /><br>
+        </div>
+
+        <div class="form-line">
+            <label class="form-label">Commentaire :</label>
+            <textarea class="form-input"><%= locals.intervention ? intervention.incident.client.comment : '' %></textarea><br><br><br>
+        </div>
+
+        <div class="form-line">
+            <label class="form-label">Cloturé :</label>
+            <% if (intervention.enclosed == true) { %>
+                <div class="form-input enclosed"></div>
+            <% } else { %>
+                <div class="form-input notenclosed"></div>
+            <% } %><br>
+        </div>
+
+        <input type="submit" name="modify" id="modify" value="Modifier l'intervention" />
+        <input type="submit" name="delete" id="delete" value="Supprimer l'intervention" />
+    </form>
+</body>
+
+</html>

@@ -1,25 +1,31 @@
 const express = require('express');
 const router = express.Router({ mergeParams: true });
-
-const global = require('./global');
+const bodyParser = require('body-parser');
+const Global = require('../../utils/global');
 
 router.use('/', express.static('./public'));
+router.use(bodyParser.json());
+router.use(bodyParser.urlencoded({ extended: true }));
 
 router.get('/', (req, res) => {
-    const incident = global.getIncidentById(req.params.id);
-
-    console.log(incident);
+    const incident = Global.IncidentHelper.GetById(req.params.id);
 
     if (incident) {
-        res.render('incidents/incident.ejs', { incident: incident, hardwares: global.data.hardwares, priorities: global.data.priorities });
+        res.render('incidents/incident.ejs', {
+            incident: incident,
+            hardwares: Global.Helper.GetAll('hardwares')
+        });
     } else {
-        res.render('incidents/notfound.ejs', { id: req.params.id});
+        res.render('notfound.ejs', {
+            resource_type: 'incident',
+            id: req.params.id,
+        });
     }
 });
 
 router.post('/', (req, res) => {
     if (req.body.delete) {
-        global.removeIncident(req.body.id);
+        Global.IncidentHelper.Delete(req.body.id);
 
         res.redirect('/incidents');
     }
@@ -36,24 +42,41 @@ router.post('/', (req, res) => {
                 mail: req.body.mail,
                 comment: req.body.comment
             },
-            validated: false
+            done: false
         };
 
-        if (global.incidentIsFilled(req.body)) {
+        if (Global.IncidentHelper.IsFilled(req.body)) {
             if (req.body.validate) {
-                if (global.interventionIsFilled(req.body)) {
-                    global.modifyIncident(incident);
-                    global.validateIncident(req);
+                if (Global.InterventionHelper.IsFilled(req.body)) {
+                    Global.IncidentHelper.Modify(incident);
+                    Global.IncidentHelper.Validate(req.body);
+                    
                     res.redirect('back');
                 } else {
-                    res.render('incidents/incident.ejs', { types: global.data.types, incident: incident, hardwares: global.data.hardwares, error: 'Le formulaire n\'a pas été correctement renseigné' });
+                    res.render('incidents/incident.ejs', {
+                        types: Global.Helper.GetAll('types'),
+                        incident: incident,
+                        hardwares: Global.Helper.GetAll('hardwares'),
+                        error: 'Le formulaire n\'a pas été correctement renseigné'
+                    });
                 }
             } else {
-                global.modifyIncident(incident);
-                res.render('incidents/incident.ejs', { types: global.data.types, incident: incident, hardwares: global.data.hardwares, success: 'Incident modifié'});
+                Global.IncidentHelper.Modify(incident);
+
+                res.render('incidents/incident.ejs', {
+                    types: Global.Helper.GetAll('types'),
+                    incident: incident,
+                    hardwares: Global.Helper.GetAll('hardwares'),
+                    success: 'Incident modifié'
+                });
             }            
         } else {            
-            res.render('incidents/incident.ejs', { types: global.data.types, incident: incident, hardwares: global.data.hardwares, error: 'Le formulaire n\'a pas été correctement renseigné' });
+            res.render('incidents/incident.ejs', {
+                types: Global.Data.types,
+                incident: incident,
+                hardwares: Global.Data.hardwares,
+                error: 'Le formulaire n\'a pas été correctement renseigné'
+            });
         }
     }
 });

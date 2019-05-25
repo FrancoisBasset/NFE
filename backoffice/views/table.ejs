@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>Back office NFE - <%= resources_type %>s</title>
+    <link rel="stylesheet" href="css/global.css" />
+    <link rel="stylesheet" href="css/table.css" />
+</head>
+
+<%- include("header"); %>
+
+<body>
+    <h1 class="title">Liste des <%= resources_type %>s</h1>
+
+    <form method="post">
+        <table id="elements" class="<%= resources_type %>s">
+            <thead>
+                <tr>
+                    <td colspan="11">
+                        <input type="submit" name="delete_all" value="Supprimer les <%= resources_type %>s sélectionnés" class="control-button"/>
+                    </td>
+                </tr>
+
+                <tr>
+                    <td><input type="checkbox" id="all_elements" /></td>
+                    <% columns.forEach(column => { %>
+                        <td><%= column %></td>
+                    <% }) %>
+                </tr>
+            </thead>
+
+            <tbody>
+                <% elements.forEach(element => { %>
+                    <tr class="row" data-id="<%= element.id %>">
+                        <td>
+                            <% if (!element.done) { %>
+                                <input type="checkbox" name="elements[]" value="<%= element.id %>" />
+                            <% } %>
+                        </td>
+
+                        <% for (var index in element) { %>
+                            <% if (typeof(element[index]) == "object") { %>
+                                <% for (var index2 in element[index]) { %>
+                                    <td><%= element[index][index2] %></td>
+                                <% } %>
+                            <% } else { %>
+                                <% if (index == "done") { %>
+                                    <% if (element[index] == true) { %>
+                                        <td class="done"></td>
+                                    <% } else { %>
+                                        <td class="notdone"></td>
+                                    <% } %>
+                                <% } else { %>
+                                    <td><%= element[index] %></td>
+                                <% } %>                    
+                            <% } %>
+                        <% } %>                        
+
+                        <% if (!element.done) { %>
+                            <td>  
+                                <form method="post">
+                                    <input type="submit" name="delete" value="Supprimer l'<%= resources_type %>" class="control-button" />                            
+                                    <input type="hidden" name="id" value="<%= element.id %>" />
+                                </form>
+                            </td>
+                        <% } %>
+                    </tr>                
+                <% }) %>
+            </tbody>
+        </table>
+    </form>
+</body>
+
+<script src="js/table.js"></script>
+<script>
+    handleFor("<%= resources_type %>");
+</script>
+
+</html>

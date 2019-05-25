@@ -10,7 +10,7 @@ button:hover {
     cursor: pointer;
 }
 
-input {
+input:hover {
     cursor: pointer;
 }
 

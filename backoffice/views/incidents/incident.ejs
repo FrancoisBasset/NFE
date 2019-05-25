@@ -5,7 +5,7 @@
     <title>Back office NFE - Incident n°<%= incident.id %></title>
     <link rel="stylesheet" href="css/global.css" />
     <link rel="stylesheet" href="css/form.css" />
-    <link rel="stylesheet" href="css/incident.css" />
+    <link rel="stylesheet" href="css/detail.css" />
 </head>
 
 <%- include("../header"); %>
@@ -58,14 +58,14 @@
 
         <div class="form-line">
             <label class="form-label">Validé :</label>
-            <% if (incident.validated == true) { %>
+            <% if (incident.done == true) { %>
                 <div class="form-input validated"></div>
             <% } else { %>
                 <div class="form-input notvalidated"></div>
             <% } %><br>
         </div>
 
-        <% if (!incident.validated) { %>
+        <% if (!incident.done) { %>
             <input type="submit" name="modify" id="modify" value="Modifier l'incident" />
             <input type="submit" name="delete" id="delete" value="Supprimer l'incident" />
 
@@ -95,12 +95,12 @@
 
             <div class="form-line">
                 <label class="form-label">Date de début :</label>
-                <input type="date" name="beginning_date" value="2019-05-08" class="form-input"/><br>
+                <input type="date" name="beginning_date" class="form-input"/><br>
             </div>
 
             <div class="form-line">
                 <label class="form-label">Date de fin :</label>
-                <input type="date" name="end_date" value="2019-05-08" class="form-input"/><br>
+                <input type="date" name="end_date" class="form-input"/><br>
             </div>
 
             <div class="form-line">
@@ -170,4 +170,8 @@
             moreHardware.remove();
         }
     });
+
+    var today = new Date().toISOString().substring(0, 10);
+    document.getElementsByName('beginning_date')[0].value = today;
+    document.getElementsByName('end_date')[0].value = today;
 </script>

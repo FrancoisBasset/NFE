@@ -1,7 +1,7 @@
 var data = {};
 
 data.incidentsIDs = 10;
-data.interventionsIDs = 10;
+data.interventionsIDs = 1;
 
 data.types = [
     {name: 'panne', text: 'Panne de courant'},
@@ -24,7 +24,7 @@ data.incidents = [
       mail: "jean@mail.fr",
       comment: "Ouais"
     },
-    "validated": false
+    done: false
   },
   {
     id: 2,
@@ -37,7 +37,7 @@ data.incidents = [
       mail: "jacques@mail.fr",
       comment: "Ouais"
     },
-    "validated": false
+    done: false
   },
   {
     id: 3,
@@ -50,7 +50,7 @@ data.incidents = [
       mail: "rene@mail.fr",
       comment: "Ouais"
     },
-    "validated": false
+    done: false
   },
 
   {
@@ -64,7 +64,7 @@ data.incidents = [
       mail: "edouard@mail.fr",
       comment: "Ouais"
     },
-    "validated": false
+    done: false
   },
   {
     id: 5,
@@ -77,7 +77,7 @@ data.incidents = [
       mail: "philippe@mail.fr",
       comment: "Ouais"
     },
-    "validated": false
+    done: false
   },
   {
     id: 6,
@@ -90,7 +90,7 @@ data.incidents = [
       mail: "pierre@mail.fr",
       comment: "Ouais"
     },
-    "validated": false
+    done: false
   },
 
   {
@@ -104,7 +104,7 @@ data.incidents = [
       mail: "denis@mail.fr",
       comment: "Ouais"
     },
-    "validated": false
+    done: false
   },
   {
     id: 8,
@@ -117,7 +117,7 @@ data.incidents = [
       mail: "marcel@mail.fr",
       comment: "Ouais"
     },
-    "validated": false
+    done: false
   },
   {
     id: 9,
@@ -130,12 +130,12 @@ data.incidents = [
       mail: "vladimir@mail.fr",
       comment: "Ouais"
     },
-    "validated": false
+    done: false
   }
 ];
 
 data.interventions = [
-    {
+    /*{
         id: 1,
         incident: {
             id: 1,
@@ -332,7 +332,7 @@ data.interventions = [
         beginning_date: "2019-05-08",
         end_date: "2019-05-08",
         enclosed: false
-    }
+    }*/
   ];
 
 data.hardwares = [

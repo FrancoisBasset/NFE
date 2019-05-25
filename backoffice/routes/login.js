@@ -1,14 +1,11 @@
 const express = require('express');
 const router = express.Router();
-
 const bodyParser = require('body-parser');
 const session = require('express-session');
 
 router.use(bodyParser.json());
 router.use(bodyParser.urlencoded({ extended: true }));
-
 router.use('/', express.static('./public'));
-
 router.use(session({secret: "secret", resave: true, saveUninitialized: true, cookie: {}}));
 
 router.get('/', (req, res) => {

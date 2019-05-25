@@ -1,4 +1,5 @@
 const app = require('express')();
+const Global = require('./utils/global');
 
 require('./utils/sentry')(app);
 
@@ -27,9 +28,6 @@ app.get('/data', (req, res) => {
 });
 
 app.post('/data', (req, res) => {
-    req.body.id = data.incidentsIDs;
-    data.incidentsIDs++;
-
-    data.incidents.push(req.body);
+    require('./utils/IncidentHelper').Add(req.body);
     res.status(201).end();
 });

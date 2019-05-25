@@ -1,6 +1,4 @@
 #back_office_logo {
-    /*position: fixed;*/
-
     font-size: 60px;
     text-decoration: none;
     color: white;    
@@ -10,7 +8,7 @@
 }
 
 #disconnect_button {
-    position: fixed;
+    position: absolute;
 
     top: 5px;
     right: 5px;

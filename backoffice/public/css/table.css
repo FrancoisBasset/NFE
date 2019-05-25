@@ -26,18 +26,18 @@ td {
     padding: 5px;
 }
 
-.validated, .enclosed {
+.done {
     background-color: limegreen !important;
 }
 
-.notvalidated, .notenclosed {
+.notdone {
     background-color: red !important;
 }
 
-#incidents td {
+.incidents td {
     background-color: seagreen;
 }
 
-#interventions td {
+.interventions td {
     background-color: sienna;
 }
