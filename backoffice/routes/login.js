@@ -6,7 +6,7 @@ const session = require('express-session');
 router.use(bodyParser.json());
 router.use(bodyParser.urlencoded({ extended: true }));
 router.use('/', express.static('./public'));
-router.use(session({secret: "secret", resave: true, saveUninitialized: true, cookie: {}}));
+router.use(session({secret: 'secret', resave: true, saveUninitialized: true, cookie: {}}));
 
 router.get('/', (req, res) => {
     if (req.session.connection) {

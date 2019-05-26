@@ -8,7 +8,7 @@ router.use(bodyParser.json());
 router.use(bodyParser.urlencoded({ extended: true }));
 
 router.get('/', (req, res) => {
-    const host = Global.GetHost(req.headers.host) + "/data";
+    const host = Global.GetHost(req.headers.host) + '/data';
 
     request.get(host, { json: true }, (e, r, body) => {
         if (e) {
@@ -25,7 +25,7 @@ router.get('/', (req, res) => {
 });
 
 router.post('/', (req, res) => {
-    const host = Global.GetHost(req.headers.host) + "/data";
+    const host = Global.GetHost(req.headers.host) + '/data';
 
     request.get(host, { json: true}, (e, r, data) => {
         const incident = {
