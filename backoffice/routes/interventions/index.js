@@ -15,9 +15,9 @@ router.get('/', (req, res) => {
             id: intervention.id,
             place: intervention.incident.place,
             type: intervention.incident.type,
-            comment: intervention.incident.client.comment,
             beginning_date: intervention.beginning_date,
             end_date: intervention.end_date,
+            priority: intervention.priority,
             done: intervention.done
         });
     }
@@ -29,9 +29,9 @@ router.get('/', (req, res) => {
             'ID',
             'Lieu',
             'Type d\'intervention',
-            'Commentaire',
             'Date de début',
             'Date de fin',
+            'Priorité',
             'Clôturé',
             'Bouton de clôturation'
         ],
