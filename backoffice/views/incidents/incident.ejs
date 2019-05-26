@@ -32,7 +32,9 @@
         <div class="form-line">
             <label class="form-label">Type d'incident :</label>
             <select name="type" class="form-input">
-                <option><%= incident.type %></option>
+                <% types.forEach(type => { %>
+                    <option value="<%= type %>" <% if (locals.incident && type == incident.type) { %> selected="selected" <% } %>><%= type %></option>
+                <% }); %>
             </select><br>
         </div>
 
@@ -66,10 +68,10 @@
         </div>
 
         <% if (!incident.done) { %>
-            <input type="submit" name="modify" id="modify" value="Modifier l'incident" />
-            <input type="submit" name="delete" id="delete" value="Supprimer l'incident" />
-
-            <h1 class="title">Valider l'incident</h1>
+            <div class="form-line">
+                <input type="submit" name="modify" id="modify" value="Modifier l'incident" />
+                <input type="submit" name="delete" id="delete" value="Supprimer l'incident" />
+            </div>
 
             <div class="form-line">
                 <button type="button" id="moreHardware">Plus de matériels</button>
@@ -77,19 +79,20 @@
 
             <div class="form-line">
                 <label class="form-label">Matériel nécessaire :</label>
-                <select name="hardwares[]" class="form-input">
+                <input type="text" name="hardwares[]" list="hardwares" class="form-input" autocomplete="off"/>
+                <datalist id="hardwares">
                     <% hardwares.forEach(hardware => { %>
-                        <option name="<%= hardware.name %>"><%= hardware.text %></option>
+                        <option value="<%= hardware %>" />
                     <% }); %>
-                </select><br>
+                </datalist><br>
             </div>
             
             <div class="form-line">
                 <label class="form-label">Priorité :</label>
                 <select name="priority" class="form-input">
-                    <option name="low">Faible</option>
-                    <option name="medium">Moyenne</option>
-                    <option name="high">Haute</option>
+                    <% priorities.forEach(priority => { %>
+                        <option value="<%= priority %>"><%= priority %></option>
+                    <% }); %>
                 </select><br>
             </div>
 
@@ -106,8 +109,9 @@
             <div class="form-line">
                 <label class="form-label">Agents :</label>
                 <select name="agents[]" class="form-input">
-                    <option>Jean</option>
-                    <option>Benoit</option>
+                    <% agents.forEach(agent => { %>
+                        <option value="<%= agent %>"><%= agent %></option>
+                    <% }); %>
                 </select><br>
             </div>
 
@@ -140,7 +144,7 @@
     lessHardware.type = 'button';
     lessHardware.textContent = 'Moins de matériels';
 
-    var count = document.getElementsByName('hardwares[]')[0].options.length;
+    var count = document.getElementById('hardwares').options.length;
 
     lessHardware.addEventListener('click', () => {
         var lines = document.getElementsByName('hardwares[]');
@@ -159,16 +163,10 @@
             moreHardware.after(lessHardware);
         }
 
-        if (document.getElementsByName('hardwares[]').length < count) {
-            var dup = original_to_dup.cloneNode(true);
-            dup.removeChild(dup.children[0]);   
+        var dup = original_to_dup.cloneNode(true);
+        dup.removeChild(dup.children[0]);   
 
-            original_to_dup.after(dup);
-        } 
-        
-        if (document.getElementsByName('hardwares[]').length >= count) {
-            moreHardware.remove();
-        }
+        original_to_dup.after(dup);
     });
 
     var today = new Date().toISOString().substring(0, 10);
