@@ -11,10 +11,7 @@ router.get('/', (req, res) => {
     const incident = Global.IncidentHelper.GetById(req.params.id);
 
     if (incident) {
-        res.render('incidents/incident.ejs', {
-            incident: incident,
-            hardwares: Global.Helper.GetAll('hardwares')
-        });
+        Render(res, incident);
     } else {
         res.render('notfound.ejs', {
             resource_type: 'incident',
@@ -48,37 +45,50 @@ router.post('/', (req, res) => {
         if (Global.IncidentHelper.IsFilled(req.body)) {
             if (req.body.validate) {
                 if (Global.InterventionHelper.IsFilled(req.body)) {
+                    const hardwares = Global.Helper.GetAll('hardwares');
+
+                    for (var hardware of req.body.hardwares) {
+                        if (!hardwares.includes(hardware)) {
+                            Global.Helper.Add('hardwares', hardware);
+                        }
+                    }
+
                     Global.IncidentHelper.Modify(incident);
                     Global.IncidentHelper.Validate(req.body);
                     
                     res.redirect('back');
                 } else {
-                    res.render('incidents/incident.ejs', {
-                        types: Global.Helper.GetAll('types'),
-                        incident: incident,
-                        hardwares: Global.Helper.GetAll('hardwares'),
+                    Render(res, incident, {
                         error: 'Le formulaire n\'a pas été correctement renseigné'
                     });
                 }
             } else {
                 Global.IncidentHelper.Modify(incident);
 
-                res.render('incidents/incident.ejs', {
-                    types: Global.Helper.GetAll('types'),
-                    incident: incident,
-                    hardwares: Global.Helper.GetAll('hardwares'),
+                Render(res, incident, {
                     success: 'Incident modifié'
                 });
             }            
         } else {            
-            res.render('incidents/incident.ejs', {
-                types: Global.Data.types,
-                incident: incident,
-                hardwares: Global.Data.hardwares,
+            Render(res, incident, {
                 error: 'Le formulaire n\'a pas été correctement renseigné'
             });
         }
     }
 });
+
+function Render(res, incident, more) {
+    var datas = {
+        incident: incident,
+        types: Global.Helper.GetAll('types'),
+        hardwares: Global.Helper.GetAll('hardwares'),
+        priorities: Global.Helper.GetAll('priorities'),
+        agents: Global.Helper.GetAll('agents'),
+    };
+
+    Object.assign(datas, more);
+
+    res.render('incidents/incident.ejs', datas);
+}
 
 module.exports = router;
