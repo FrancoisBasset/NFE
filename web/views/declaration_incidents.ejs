@@ -28,7 +28,7 @@
             <label class="form-label" for="incident_type">Type d'incident :</label>
             <select name="type" id="type" class="form-input">
                 <% types.forEach(type => { %>
-                    <option value="<%= type.name %>" <% if (locals.incident && type.name == incident.type) { %> selected="selected" <% } %>><%= type.text %></option>
+                    <option value="<%= type %>" <% if (locals.incident && type == incident.type) { %> selected="selected" <% } %>><%= type %></option>
                 <% }); %>
             </select><br>
         </div>
