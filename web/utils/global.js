@@ -1,9 +1,17 @@
 module.exports = {
-    GetHost: host => {
-        if (host == 'nfe.fr') {
-            return 'http://nfe.fr:81';
-        } else {
+    GetHost: (host, mobile) => {
+        if (host == 'https://nfe-web.herokuapp.com') {
             return 'https://nfe-backoffice.herokuapp.com';
+        } else {
+            if (!mobile) {
+                return 'http://localhost:81';
+            } else {
+                if (host == 'localhost') {
+                    return 'http://localhost:81';
+                } else {
+                    return 'http://localhost:3001';
+                }
+            }
         }
     },
 

@@ -10,6 +10,8 @@ router.get('/', (req, res) => {
     var host = Global.GetHost(req.headers.host);
 
     request.get(host, (e, r) => {
+        var host = Global.GetHost(req.headers.host, true);
+        
         res.render('index.ejs', {
             host: host,
             back_office: !e
