@@ -7,18 +7,25 @@ module.exports = {
     },
 
     GetById: id => {
-        return Helper.GetById('incidents', id)
+        return Helper.GetById('incidents', id);
     },
 
     Add: body => {
-        var incident = {};
-        incident.id = data.incidentsIDs;
-
-        Object.assign(incident, body);
-        incident.done = false;
+        Helper.Add('incidents', {
+            id: data.incidentsIDs,
+            place: body.place,
+            date: body.date,
+            type: body.type,
+            client: {
+                name: body.name,
+                phone: body.phone,
+                mail: body.mail,
+                comment: body.comment
+            },
+            done: false
+        });
 
         data.incidentsIDs++;
-        Helper.Add('incidents', incident);
     },
 
     Validate: body => {
@@ -28,9 +35,15 @@ module.exports = {
         require('./InterventionHelper').Add(incident, body);
     },
 
-    Modify: incident => {
-        module.exports.Delete(incident.id);
-        module.exports.Add(incident);
+    Modify: body => {
+        var incident = module.exports.GetById(body.id);
+        incident.place = body.place,
+        incident.date = body.date,
+        incident.type = body.type,
+        incident.client.name = body.name;
+        incident.client.phone = body.phone,
+        incident.client.mail = body.mail,
+        incident.client.comment = body.comment
     },
 
     Delete: id => {

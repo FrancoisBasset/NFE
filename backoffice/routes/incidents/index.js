@@ -2,7 +2,7 @@ const router = require('express').Router();
 const bodyParser = require('body-parser');
 const Global = require('../../utils/global');
 
-//router.use(require('../../utils/checkConnection'));
+router.use(require('../../utils/checkConnection'));
 router.use('/:id', require('./incident'));
 router.use(bodyParser.json());
 router.use(bodyParser.urlencoded({ extended: true }));

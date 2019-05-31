@@ -28,20 +28,6 @@ router.post('/', (req, res) => {
     }
 
     if (req.body.modify || req.body.validate) {
-        var incident = {
-            id: req.body.id,
-            place: req.body.place,
-            date: req.body.date,
-            type: req.body.type,
-            client: {
-                name: req.body.name,
-                phone: req.body.phone,
-                mail: req.body.mail,
-                comment: req.body.comment
-            },
-            done: false
-        };
-
         if (Global.IncidentHelper.IsFilled(req.body)) {
             if (req.body.validate) {
                 if (Global.InterventionHelper.IsFilled(req.body)) {
@@ -53,23 +39,26 @@ router.post('/', (req, res) => {
                         }
                     }
 
-                    Global.IncidentHelper.Modify(incident);
+                    Global.IncidentHelper.Modify(req.body);
                     Global.IncidentHelper.Validate(req.body);
                     
                     res.redirect('back');
                 } else {
-                    Render(res, incident, {
+                    Render(res, req.body, {
                         error: 'Le formulaire n\'a pas été correctement renseigné'
                     });
                 }
             } else {
-                Global.IncidentHelper.Modify(incident);
+                Global.IncidentHelper.Modify(req.body);
+                const incident = Global.IncidentHelper.GetById(req.body.id);
 
                 Render(res, incident, {
                     success: 'Incident modifié'
                 });
             }            
         } else {            
+            const incident = Global.IncidentHelper.GetById(req.body.id);
+            
             Render(res, incident, {
                 error: 'Le formulaire n\'a pas été correctement renseigné'
             });

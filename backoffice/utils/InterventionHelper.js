@@ -11,21 +11,22 @@ module.exports = {
     },
 
     Add: (incident, body) => {
-        var intervention = {};
-        
-        intervention.incident = incident;
+        Helper.Add('interventions', {
+            id: data.interventionsIDs,
+            incident: incident,
+            hardwares: body.hardwares,
+            priority: body.priority,
+            beginning_date: body.beginning_date,
+            end_date: body.end_date,
+            agents: body.agents,
+            done: false
+        });
 
-        intervention.id = data.interventionsIDs;
-        data.interventionsIDs++;
+        data.interventionsIDs++;        
+    },
 
-        intervention.hardwares = body.hardwares;
-        intervention.priority = body.priority;
-        intervention.beginning_date = body.beginning_date;
-        intervention.end_date = body.end_date;
-        intervention.agents = body.agents;
-        intervention.done = false;
+    Modify: intervention => {
 
-        Helper.Add('interventions', intervention);
     },
 
     IsFilled: body => {

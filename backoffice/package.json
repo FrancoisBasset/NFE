@@ -1,7 +1,7 @@
 {
   "name": "backoffice",
   "version": "0.0.1",
-  "description": "Partie back office backoffice.nfe.fr",
+  "description": "Partie Back office de NFE",
   "main": "index.js",
   "scripts": {
     "dev": "node-dev index.js",

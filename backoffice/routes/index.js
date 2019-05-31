@@ -6,11 +6,11 @@ router.use('/', express.static('./public'));
 router.use(session({secret: 'secret', resave: true, saveUninitialized: true, cookie: {}}));
 
 router.get('/', (req, res) => {
-    //if (req.session.connection) {
+    if (req.session.connection) {
         res.render('index.ejs');
-    /*} else {
+    } else {
         res.redirect('/login');
-    }*/
+    }
 });
 
 module.exports = router;

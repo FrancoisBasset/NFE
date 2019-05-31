@@ -13,7 +13,7 @@
 <body>
     <h1 class="title">Intervention n°<%= intervention.id %></h1>
 
-    <form class="form">
+    <form method="post" class="form">
         <div class="form-line">
             <label class="form-label">Incident :</label>
             <a href="/incidents/<%= intervention.incident.id %>" class="form-input">/incidents/<%= intervention.incident.id %></a><br>
@@ -44,8 +44,21 @@
         </div>
 
         <div class="form-line">
-            <label class="form-label">Commentaire :</label>
-            <textarea class="form-input"><%= locals.intervention ? intervention.incident.client.comment : '' %></textarea><br><br><br>
+            <label class="form-label">Matériels :</label>
+            <select class="form-input">
+                <% intervention.hardwares.forEach(hardware => { %>
+                    <option value="<%= hardware %>" ><%= hardware %></option>
+                <% }); %>
+            </select><br>
+        </div>
+
+        <div class="form-line">
+            <label class="form-label">Priorité :</label>
+            <select class="form-input">
+                <% priorities.forEach(priority => { %>
+                    <option value="<%= priority.name %>" <% if (locals.intervention && priority.name == intervention.priority) { %> selected="selected" <% } %>><%= priority.text %></option>
+                <% }); %>
+            </select><br>
         </div>
 
         <div class="form-line">

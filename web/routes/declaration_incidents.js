@@ -1,5 +1,4 @@
-const express = require('express');
-const router = express.Router();
+const router = require('express').Router();
 const request = require('request');
 const Global = require('../utils/global');
 const bodyParser = require('body-parser');
@@ -28,22 +27,10 @@ router.post('/', (req, res) => {
     const host = Global.GetHost(req.headers.host) + '/data';
 
     request.get(host, { json: true}, (e, r, data) => {
-        const incident = {
-            place: req.body.place,
-            date: req.body.date,
-            type: req.body.type,
-            client: {
-                name: req.body.name,
-                phone: req.body.phone,
-                mail: req.body.mail,
-                comment: req.body.comment
-            }
-        };
-
         if (e) {
             res.render('declaration_incidents.ejs', {
                 types: [],
-                incident: incident,
+                body: req.body,
                 error: 'Impossible de créer un incident, veuillez réessayer ultérieurement'
             });
 
@@ -53,24 +40,24 @@ router.post('/', (req, res) => {
         if (!Global.IncidentIsFilled(req.body)) {
             res.render('declaration_incidents.ejs', {
                 types: data.types,
-                incident: incident,
+                body: req.body,
                 error: 'Le formulaire n\'a pas été correctement renseigné'
             });
 
             return;
         }
     
-        request.post(host, { json: incident}, (e, r) => {
+        request.post(host, { json: req.body}, (e, r) => {
             if (e) {
                 res.render('declaration_incidents.ejs', {
                     types: [],
-                    incident: incident,
+                    body: req.body,
                     error: 'Impossible de créer un incident, veuillez réessayer ultérieurement'
                 });
             } else {
                 res.render('declaration_incidents.ejs', {
                     types: data.types,
-                    incident: incident
+                    body: req.body
                 });
             }
         });        
