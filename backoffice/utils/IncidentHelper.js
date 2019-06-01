@@ -16,12 +16,10 @@ module.exports = {
             place: body.place,
             date: body.date,
             type: body.type,
-            client: {
-                name: body.name,
-                phone: body.phone,
-                mail: body.mail,
-                comment: body.comment
-            },
+            name: body.name,
+            phone: body.phone,
+            mail: body.mail,
+            comment: body.comment,
             done: false
         });
 
@@ -40,10 +38,10 @@ module.exports = {
         incident.place = body.place,
         incident.date = body.date,
         incident.type = body.type,
-        incident.client.name = body.name;
-        incident.client.phone = body.phone,
-        incident.client.mail = body.mail,
-        incident.client.comment = body.comment
+        incident.name = body.name;
+        incident.phone = body.phone,
+        incident.mail = body.mail,
+        incident.comment = body.comment
     },
 
     Delete: id => {

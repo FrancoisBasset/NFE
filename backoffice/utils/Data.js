@@ -43,12 +43,10 @@ module.exports = {
         place: 'Republique',
         date: '2019-05-05',
         type: 'Panne de courant',
-        client: {
         name: 'Jean',
         phone: '0123456789',
         mail: 'jean@mail.fr',
-        comment: 'Ouais'
-        },
+        comment: 'Ouais',
         done: false
     },
     {
@@ -56,12 +54,10 @@ module.exports = {
         place: 'Romorantin',
         date: '2019-05-05',
         type: 'Compteur cassé',
-        client: {
         name: 'Jacques',
         phone: '0123456789',
         mail: 'jacques@mail.fr',
-        comment: 'Ouais'
-        },
+        comment: 'Ouais',
         done: false
     },
     {
@@ -69,12 +65,10 @@ module.exports = {
         place: 'Saint-Gervais',
         date: '2019-05-05',
         type: 'Compteur buggé',
-        client: {
         name: 'René',
         phone: '0123456789',
         mail: 'rene@mail.fr',
-        comment: 'Ouais'
-        },
+        comment: 'Ouais',
         done: false
     },
 
@@ -83,12 +77,10 @@ module.exports = {
         place: 'Menton',
         date: '2019-05-05',
         type: 'Sous-voltage',
-        client: {
         name: 'Edouard',
         phone: '0123456789',
         mail: 'edouard@mail.fr',
-        comment: 'Ouais'
-        },
+        comment: 'Ouais',
         done: false
     },
     {
@@ -96,12 +88,10 @@ module.exports = {
         place: 'Saint-Benoit',
         date: '2019-05-05',
         type: 'Sur-voltage',
-        client: {
         name: 'Philippe',
         phone: '0123456789',
         mail: 'philippe@mail.fr',
-        comment: 'Ouais'
-        },
+        comment: 'Ouais',
         done: false
     },
     {
@@ -109,12 +99,10 @@ module.exports = {
         place: 'Strasbourg',
         date: '2019-05-05',
         type: 'Pylone cassé',
-        client: {
         name: 'Pierre',
         phone: '0123456789',
         mail: 'pierre@mail.fr',
-        comment: 'Ouais'
-        },
+        comment: 'Ouais',
         done: false
     },
 
@@ -123,12 +111,10 @@ module.exports = {
         place: 'Metz',
         date: '2019-05-05',
         type: 'Panne de courant',
-        client: {
         name: 'Denis',
         phone: '0123456789',
         mail: 'denis@mail.fr',
-        comment: 'Ouais'
-        },
+        comment: 'Ouais',
         done: false
     },
     {
@@ -136,12 +122,10 @@ module.exports = {
         place: 'Saint-Moret',
         date: '2019-05-05',
         type: 'Compteur cassé',
-        client: {
         name: 'Marcel',
         phone: '0123456789',
         mail: 'marcel@mail.fr',
-        comment: 'Ouais'
-        },
+        comment: 'Ouais',
         done: false
     },
     {
@@ -149,12 +133,10 @@ module.exports = {
         place: 'Reims',
         date: '2019-05-05',
         type: 'Compteur buggé',
-        client: {
         name: 'Vladimir',
         phone: '0123456789',
         mail: 'vladimir@mail.fr',
-        comment: 'Ouais'
-        },
+        comment: 'Ouais',
         done: false
     }
     ]

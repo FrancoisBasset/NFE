@@ -9,7 +9,7 @@ router.use(bodyParser.urlencoded({ extended: true }));
 
 router.get('/', (req, res) => {
     const incident = Global.IncidentHelper.GetById(req.params.id);
-
+    
     if (incident) {
         Render(res, incident);
     } else {
@@ -50,16 +50,13 @@ router.post('/', (req, res) => {
                 }
             } else {
                 Global.IncidentHelper.Modify(req.body);
-                const incident = Global.IncidentHelper.GetById(req.body.id);
 
-                Render(res, incident, {
+                Render(res, req.body, {
                     success: 'Incident modifié'
                 });
             }            
-        } else {            
-            const incident = Global.IncidentHelper.GetById(req.body.id);
-            
-            Render(res, incident, {
+        } else {
+            Render(res, req.body, {
                 error: 'Le formulaire n\'a pas été correctement renseigné'
             });
         }

@@ -39,20 +39,14 @@
                         </td>
 
                         <% for (var index in element) { %>
-                            <% if (typeof(element[index]) == "object") { %>
-                                <% for (var index2 in element[index]) { %>
-                                    <td><%= element[index][index2] %></td>
+                            <% if (index == "done") { %>
+                                <% if (element[index] == true) { %>
+                                    <td class="done"></td>
+                                <% } else { %>
+                                    <td class="notdone"></td>
                                 <% } %>
                             <% } else { %>
-                                <% if (index == "done") { %>
-                                    <% if (element[index] == true) { %>
-                                        <td class="done"></td>
-                                    <% } else { %>
-                                        <td class="notdone"></td>
-                                    <% } %>
-                                <% } else { %>
-                                    <td><%= element[index] %></td>
-                                <% } %>                    
+                                <td><%= element[index] %></td>
                             <% } %>
                         <% } %>                        
 
