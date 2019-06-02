@@ -13,7 +13,9 @@ module.exports = {
     Add: (incident, body) => {
         Helper.Add('interventions', {
             id: data.interventionsIDs,
-            incident: incident,
+            incident_id: incident.id,
+            type: incident.type,
+            place: incident.place,
             hardwares: body.hardwares,
             priority: body.priority,
             beginning_date: body.beginning_date,
@@ -30,7 +32,7 @@ module.exports = {
     },
 
     IsFilled: body => {
-        if (body.hardwares.length == 0 ||
+        if (body.hardwares.length == 0 || body.hardwares[0] == '' ||
             body.priority == '' ||
             body.beginning_date.trim() == '' ||
             body.end_date.trim() == '' ||

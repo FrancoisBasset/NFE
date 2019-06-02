@@ -16,19 +16,19 @@
     <form method="post" class="form">
         <div class="form-line">
             <label class="form-label">Incident :</label>
-            <a href="/incidents/<%= intervention.incident.id %>" class="form-input">/incidents/<%= intervention.incident.id %></a><br>
+            <a href="/incidents/<%= intervention.id %>" class="form-input">/incidents/<%= intervention.incident_id %></a><br>
         </div>
 
         <div class="form-line">
             <label class="form-label">Lieu :</label>
-            <input type="text" class="form-input" value="<%= locals.intervention ? intervention.incident.place : '' %>"/><br>
+            <input type="text" class="form-input" value="<%= locals.intervention ? intervention.place : '' %>"/><br>
         </div>
 
         <div class="form-line">
             <label class="form-label">Type d'intervention</label>
             <select class="form-input">
                 <% types.forEach(type => { %>
-                    <option value="<%= type.name %>" <% if (locals.intervention && type.name == intervention.type) { %> selected="selected" <% } %>><%= type.text %></option>
+                    <option value="<%= type %>" <% if (locals.intervention && type == intervention.type) { %> selected="selected" <% } %>><%= type %></option>
                 <% }); %>
             </select><br>
         </div>

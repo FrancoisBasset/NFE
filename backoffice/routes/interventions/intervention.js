@@ -7,10 +7,12 @@ router.use('/', express.static('./public'));
 router.use(bodyParser.json());
 router.use(bodyParser.urlencoded({ extended: true }));
 
-router.get('/', (req, res) => {    
+router.get('/', (req, res) => {
+    const intervention = Global.InterventionHelper.GetById(req.params.id);
+
     res.render('interventions/intervention.ejs', {
-        types: Global.Helper.GetAll('types'),
-        intervention: Global.InterventionHelper.GetById(req.params.id),
+        intervention: intervention,
+        types: Global.Helper.GetAll('types'),        
         priorities: Global.Helper.GetAll('priorities')
     });
 });

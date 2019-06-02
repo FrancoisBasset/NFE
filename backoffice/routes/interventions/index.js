@@ -13,8 +13,8 @@ router.get('/', (req, res) => {
     for (var intervention of Global.InterventionHelper.GetAll()) {
         clone.push({
             id: intervention.id,
-            place: intervention.incident.place,
-            type: intervention.incident.type,
+            place: intervention.place,
+            type: intervention.type,
             beginning_date: intervention.beginning_date,
             end_date: intervention.end_date,
             priority: intervention.priority,
