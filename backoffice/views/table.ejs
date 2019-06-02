@@ -39,6 +39,10 @@
                         </td>
 
                         <% for (var index in element) { %>
+                            <% if (index == "intervention_id") { %>
+                                <% continue; %>
+                            <% } %>
+
                             <% if (index == "done") { %>
                                 <% if (element[index] == true) { %>
                                     <td class="done"></td>

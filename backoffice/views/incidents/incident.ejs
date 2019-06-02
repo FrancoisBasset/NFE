@@ -67,6 +67,13 @@
             <% } %><br>
         </div>
 
+        <% if (incident.done) { %>
+            <div class="form-line">
+                <label class="form-label">Intervention :</label>
+                <a href="/interventions/<%= incident.intervention_id %>" class="form-input">/interventions/<%= incident.intervention_id %></a>
+            </div>
+        <% } %>
+
         <% if (!incident.done) { %>
             <div class="form-line">
                 <input type="submit" name="modify" id="modify" value="Modifier l'incident" />

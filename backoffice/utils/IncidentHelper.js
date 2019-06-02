@@ -29,6 +29,7 @@ module.exports = {
     Validate: body => {
         var incident = module.exports.GetById(body.id);
         incident.done = true;
+        incident.intervention_id = data.interventionsIDs;
 
         require('./InterventionHelper').Add(incident, body);
     },
