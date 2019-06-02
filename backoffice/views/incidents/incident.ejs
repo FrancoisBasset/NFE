@@ -81,17 +81,25 @@
             </div>
 
             <div class="form-line">
-                <button type="button" id="moreHardware">Plus de matériels</button>
-            </div>
-
-            <div class="form-line">
                 <label class="form-label">Matériel nécessaire :</label>
-                <input type="text" name="hardwares[]" list="hardwares" class="form-input" autocomplete="off"/>
-                <datalist id="hardwares">
-                    <% hardwares.forEach(hardware => { %>
-                        <option value="<%= hardware %>" />
-                    <% }); %>
-                </datalist><br>
+                <table class="form-input">
+                    <tr id="originalMaterialLine">
+                        <td>
+                            <input type="text" name="hardwares[]" list="hardwares" autocomplete="off"/>
+                            <datalist id="hardwares">
+                                <% hardwares.forEach(hardware => { %>
+                                    <option value="<%= hardware %>" />
+                                <% }); %>
+                            </datalist>
+                        </td>
+                        <td>
+                            <button type="button" class="addMaterial">+</button>
+                        </td>
+                        <td>
+                            <button type="button" class="remove">-</button>
+                        </td>
+                    </tr>
+                </table><br>
             </div>
             
             <div class="form-line">
@@ -112,14 +120,26 @@
                 <label class="form-label">Date de fin :</label>
                 <input type="date" name="end_date" class="form-input"/><br>
             </div>
-
+                        
             <div class="form-line">
                 <label class="form-label">Agents :</label>
-                <select name="agents[]" class="form-input">
-                    <% agents.forEach(agent => { %>
-                        <option value="<%= agent %>"><%= agent %></option>
-                    <% }); %>
-                </select><br>
+                <table class="form-input">
+                    <tr id="originalAgentLine">
+                        <td>
+                            <select name="agents[]" >
+                                <% agents.forEach(agent => { %>
+                                    <option value="<%= agent %>"><%= agent %></option>
+                                <% }); %>
+                            </select>
+                        </td>
+                        <td>
+                            <button type="button" class="addAgent">+</button>
+                        </td>
+                        <td>
+                            <button type="button" class="remove">-</button>
+                        </td>
+                    </tr>
+                </table><br>
             </div>
 
             <input type="submit" name="validate" value="Valider l'incident" />
@@ -143,37 +163,28 @@
 
 </html>
 
-<script>    
-    var original_to_dup = document.getElementsByName('hardwares[]')[0].parentElement;
+<script>
+    const originalAgentLine = document.getElementById('originalAgentLine');
+    const originalMaterialLine = document.getElementById('originalMaterialLine');
 
-    var moreHardware = document.getElementById('moreHardware');
-    var lessHardware = document.createElement('button');
-    lessHardware.type = 'button';
-    lessHardware.textContent = 'Moins de matériels';
+    document.addEventListener('click', function(e) {
+        if (e.srcElement.className == 'addAgent' || e.srcElement.className == 'addMaterial') {
+            var index = e.srcElement.parentElement.parentElement.rowIndex + 1;
+            var row = e.srcElement.parentElement.parentElement.parentElement.insertRow(index);
 
-    var count = document.getElementById('hardwares').options.length;
-
-    lessHardware.addEventListener('click', () => {
-        var lines = document.getElementsByName('hardwares[]');
-
-        lines[lines.length - 1].parentElement.remove();
-
-        if (document.getElementsByName('hardwares[]').length == 1) {
-            lessHardware.remove();
-        } else {
-            lessHardware.before(moreHardware);
+            switch (e.srcElement.className) {
+                case 'addAgent':
+                    row.innerHTML = originalAgentLine.innerHTML;
+                    break;
+                case 'addMaterial':
+                    row.innerHTML = originalMaterialLine.innerHTML;
+                    break;
+            }
+        } else if (e.srcElement.className == 'remove') {
+            if (e.srcElement.parentElement.parentElement.parentElement.children.length > 1) {
+                e.srcElement.parentElement.parentElement.remove();
+            }
         }
-    });
-
-    document.getElementById('moreHardware').addEventListener('click', (e) => {
-        if (document.getElementsByName('hardwares[]').length == 1) {
-            moreHardware.after(lessHardware);
-        }
-
-        var dup = original_to_dup.cloneNode(true);
-        dup.removeChild(dup.children[0]);   
-
-        original_to_dup.after(dup);
     });
 
     var today = new Date().toISOString().substring(0, 10);

@@ -30,11 +30,14 @@ module.exports = {
     interventions: [],
 
     agents: [
-        'Jean',
+        'Aleksandr',
+        'Anton',
         'Grigori',
         'Igor',
-        'Yaroslav',
-        'Nastya'
+        'Miron',
+        'Nastya',
+        'Vladimir',
+        'Yaroslav'
     ],
 
     incidents: [
