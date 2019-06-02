@@ -56,7 +56,7 @@
             <label class="form-label">Priorité :</label>
             <select class="form-input">
                 <% priorities.forEach(priority => { %>
-                    <option value="<%= priority.name %>" <% if (locals.intervention && priority.name == intervention.priority) { %> selected="selected" <% } %>><%= priority.text %></option>
+                    <option value="<%= priority %>" <% if (locals.intervention && priority == intervention.priority) { %> selected="selected" <% } %>><%= priority %></option>
                 <% }); %>
             </select><br>
         </div>
