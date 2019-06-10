@@ -12,8 +12,10 @@ router.get('/', (req, res) => {
 
     res.render('interventions/intervention.ejs', {
         intervention: intervention,
+        hardwares: Global.Helper.GetAll('hardwares'),
         types: Global.Helper.GetAll('types'),        
-        priorities: Global.Helper.GetAll('priorities')
+        priorities: Global.Helper.GetAll('priorities'),
+        agents: Global.Helper.GetAll('agents')
     });
 });
 

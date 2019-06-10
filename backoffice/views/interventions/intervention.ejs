@@ -45,11 +45,26 @@
 
         <div class="form-line">
             <label class="form-label">Matériels :</label>
-            <select class="form-input">
+            <table class="form-input">
                 <% intervention.hardwares.forEach(hardware => { %>
-                    <option value="<%= hardware %>" ><%= hardware %></option>
+                    <tr id="originalMaterialLine">
+                        <td>
+                            <input type="text" name="hardwares[]" list="hardwares" autocomplete="off" value="<%= hardware %>"/>
+                            <datalist id="hardwares">
+                                <% hardwares.forEach(hardware => { %>
+                                    <option value="<%= hardware %>" />
+                                <% }); %>
+                            </datalist>
+                        </td>
+                        <td>
+                            <button type="button" class="addMaterial">+</button>
+                        </td>
+                        <td>
+                            <button type="button" class="remove">-</button>
+                        </td>
+                    </tr>
                 <% }); %>
-            </select><br>
+            </table><br>
         </div>
 
         <div class="form-line">
@@ -59,6 +74,29 @@
                     <option value="<%= priority %>" <% if (locals.intervention && priority == intervention.priority) { %> selected="selected" <% } %>><%= priority %></option>
                 <% }); %>
             </select><br>
+        </div>
+
+        <div class="form-line">
+            <label class="form-label">Agents :</label>
+            <table class="form-input">
+                <% intervention.agents.forEach(agent => { %>
+                    <tr id="originalAgentLine">
+                        <td>
+                            <select name="agents[]" >
+                                <% agents.forEach(agent => { %>
+                                    <option value="<%= agent %>"><%= agent %></option>
+                                <% }); %>
+                            </select>
+                        </td>
+                        <td>
+                            <button type="button" class="addAgent">+</button>
+                        </td>
+                        <td>
+                            <button type="button" class="remove">-</button>
+                        </td>
+                    </tr>
+                <% }); %>
+            </table><br>
         </div>
 
         <div class="form-line">
@@ -76,3 +114,5 @@
 </body>
 
 </html>
+
+<script src="js/select.js"></script>
