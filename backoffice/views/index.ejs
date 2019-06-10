@@ -5,6 +5,7 @@
     <title>Back office Opérateur</title>
     <link rel="stylesheet" href="css/index.css" />
     <link rel="stylesheet" href="css/global.css" />
+    <link rel="manifest" href="manifest.json" />
 </head>
 
 <%- include("header"); %>
@@ -27,9 +28,14 @@
             <button class="menu_button" id="holidays_button">Congés</button>
         </a><br>
     </div>
-
-    
-
 </body>
 
 </html>
+
+<script>
+    if('serviceWorker' in navigator) {
+        navigator.serviceWorker.register('/sw.js').then(function() {
+            console.log("Service Worker Registered");
+        });
+    }
+</script>
