@@ -24,14 +24,14 @@
     background-color: red;
 }
 
-.validated, .enclosed {
+.done {
     width: 40%;
     height: 20px;
 
     background-color: green;
 }
 
-.notvalidated, .notenclosed {
+.notdone {
     width: 40%;
     height: 20px;
 

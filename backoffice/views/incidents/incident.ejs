@@ -60,10 +60,10 @@
 
         <div class="form-line">
             <label class="form-label">Validé :</label>
-            <% if (incident.done == true) { %>
-                <div class="form-input validated"></div>
+            <% if (incident.done) { %>
+                <div class="form-input done"></div>
             <% } else { %>
-                <div class="form-input notvalidated"></div>
+                <div class="form-input notdone"></div>
             <% } %><br>
         </div>
 
