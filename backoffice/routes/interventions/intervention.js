@@ -36,8 +36,6 @@ router.post('/', (req, res) => {
 })
 
 function Render(res, intervention) {
-    console.log(intervention);
-
     res.render('interventions/intervention.ejs', {
         intervention: intervention,
         hardwares: Global.Helper.GetAll('hardwares'),

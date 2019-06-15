@@ -56,12 +56,14 @@
                                 <% }); %>
                             </datalist>
                         </td>
-                        <td>
-                            <button type="button" class="addMaterial">+</button>
-                        </td>
-                        <td>
-                            <button type="button" class="remove">-</button>
-                        </td>
+                        <% if (!intervention.done) { %>
+                            <td>
+                                <button type="button" class="addMaterial">+</button>
+                            </td>
+                            <td>
+                                <button type="button" class="remove">-</button>
+                            </td>
+                        <% } %>
                     </tr>
                 <% }); %>
             </table><br>
