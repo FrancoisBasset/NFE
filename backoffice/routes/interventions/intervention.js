@@ -29,7 +29,7 @@ router.post('/', (req, res) => {
     }
 
     if (req.body.close) {
-        //Global.InterventionHelper.Close(req.body.id);
+        Global.InterventionHelper.Close(req.body.id);
     }
 
     res.redirect('back');
