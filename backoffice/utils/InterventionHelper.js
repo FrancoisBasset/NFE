@@ -27,8 +27,15 @@ module.exports = {
         data.interventionsIDs++;        
     },
 
-    Modify: intervention => {
-
+    Modify: body => {
+        var intervention = module.exports.GetById(body.id);
+        intervention.place = body.place;
+        intervention.type = body.type;
+        intervention.beginning_date = body.beginning_date;
+        intervention.end_date = body.end_date;
+        intervention.hardwares = body.hardwares;
+        intervention.priority = body.priority;
+        intervention.agents = body.agents;
     },
 
     IsFilled: body => {

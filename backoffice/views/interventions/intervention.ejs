@@ -21,12 +21,12 @@
 
         <div class="form-line">
             <label class="form-label">Lieu :</label>
-            <input type="text" class="form-input" value="<%= locals.intervention ? intervention.place : '' %>"/><br>
+            <input type="text" name="place" class="form-input" value="<%= locals.intervention ? intervention.place : '' %>"/><br>
         </div>
 
         <div class="form-line">
             <label class="form-label">Type d'intervention</label>
-            <select class="form-input">
+            <select name="type" class="form-input">
                 <% types.forEach(type => { %>
                     <option value="<%= type %>" <% if (locals.intervention && type == intervention.type) { %> selected="selected" <% } %>><%= type %></option>
                 <% }); %>
@@ -35,12 +35,12 @@
 
         <div class="form-line">
             <label class="form-label">Date de début :</label>
-            <input type="date" class="form-input" value="<%= locals.intervention ? intervention.beginning_date : '' %>" /><br>
+            <input type="date" name="beginning_date" class="form-input" value="<%= locals.intervention ? intervention.beginning_date : '' %>" /><br>
         </div>
 
         <div class="form-line">
             <label class="form-label">Date de fin :</label>
-            <input type="date" class="form-input" value="<%= locals.intervention ? intervention.end_date : '' %>" /><br>
+            <input type="date" name="end_date" class="form-input" value="<%= locals.intervention ? intervention.end_date : '' %>" /><br>
         </div>
 
         <div class="form-line">
@@ -69,7 +69,7 @@
 
         <div class="form-line">
             <label class="form-label">Priorité :</label>
-            <select class="form-input">
+            <select name="priority" class="form-input">
                 <% priorities.forEach(priority => { %>
                     <option value="<%= priority %>" <% if (locals.intervention && priority == intervention.priority) { %> selected="selected" <% } %>><%= priority %></option>
                 <% }); %>
@@ -79,12 +79,12 @@
         <div class="form-line">
             <label class="form-label">Agents :</label>
             <table class="form-input">
-                <% intervention.agents.forEach(agent => { %>
+                <% intervention.agents.forEach(agent1 => { %>
                     <tr id="originalAgentLine">
                         <td>
                             <select name="agents[]" >
-                                <% agents.forEach(agent => { %>
-                                    <option value="<%= agent %>"><%= agent %></option>
+                                <% agents.forEach(agent2 => { %>
+                                    <option value="<%= agent2 %>" <% if (agent1 == agent2) { %>selected="selected"<% } %></option><%= agent2 %></option>
                                 <% }); %>
                             </select>
                         </td>
@@ -110,6 +110,8 @@
 
         <input type="submit" name="modify" id="modify" value="Modifier l'intervention" />
         <input type="submit" name="close" id="close" value="Clôturer l'intervention" />
+        <input type="hidden" name="id" value="<%= intervention.id %>" />
+        <input type="hidden" name="incident_id" value="<%= intervention.incident_id %>" />
     </form>
 </body>
 
