@@ -30,14 +30,46 @@ module.exports = {
     interventions: [],
 
     agents: [
-        'Aleksandr',
-        'Anton',
-        'Grigori',
-        'Igor',
-        'Miron',
-        'Nastya',
-        'Vladimir',
-        'Yaroslav'
+        {
+            id: 1,
+            prenom: 'Aleksandr',
+            nom: 'Gagarin',
+        },
+        {
+            id: 2,
+            prenom: 'Anton',
+            nom: 'Bodganov',
+        },
+        {
+            id: 3,
+            prenom: 'Grigori',
+            nom: 'Intelov',
+        },
+        {
+            id: 4,
+            prenom: 'Igor',
+            nom: 'Nodejsov',
+        },
+        {
+            id: 5,
+            prenom: 'Miron',
+            nom: 'Dotnetin',
+        },
+        {
+            id: 6,
+            prenom: 'Nastya',
+            nom: 'Samsungina',
+        },
+        {
+            id: 7,
+            prenom: 'Vladimir',
+            nom: 'Poutine',
+        },
+        {
+            id: 8,
+            prenom: 'Yaroslav',
+            nom: 'Temperaturovitch',
+        }
     ],
 
     incidents: [

@@ -15,14 +15,18 @@
     <form method="post">
         <table id="elements" class="<%= resources_type %>s">
             <thead>
-                <tr>
-                    <td colspan="11">
-                        <input type="submit" name="action_all" value="<%= action %> les <%= resources_type %>s sélectionnés" class="control-button"/>
-                    </td>
-                </tr>
+                <% if (locals.action) { %>
+                    <tr>
+                        <td colspan="11">
+                            <input type="submit" name="action_all" value="<%= action %> les <%= resources_type %>s sélectionnés" class="control-button"/>
+                        </td>
+                    </tr>
+                <% } %>
 
                 <tr>
-                    <td><input type="checkbox" id="all_elements" /></td>
+                    <td>
+                        <input type="checkbox" id="all_elements" />
+                    </td>                    
                     <% columns.forEach(column => { %>
                         <td><%= column %></td>
                     <% }) %>
@@ -54,7 +58,7 @@
                             <% } %>
                         <% } %>                        
 
-                        <% if (!element.done) { %>
+                        <% if (!element.done && locals.action) { %>
                             <td>  
                                 <form method="post">
                                     <input type="submit" name="action" value="<%= action %> l'<%= resources_type %>" class="control-button" />                            
