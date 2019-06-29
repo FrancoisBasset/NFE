@@ -7,8 +7,6 @@ router.use('/:id', require('./agent'));
 router.use(bodyParser.json());
 router.use(bodyParser.urlencoded({ extended: true }));
 
-router.use('/:id', require('./agent'));
-
 router.get('/', (req, res) => {
     res.render('table.ejs', {
         resources_type: 'agent',
@@ -16,7 +14,9 @@ router.get('/', (req, res) => {
         columns: [
             'ID',
             'Prénom',
-            'Nom'
+            'Nom',
+            'Longitude',
+            'Latitude'
         ]
     });
 });

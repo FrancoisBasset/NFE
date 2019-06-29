@@ -86,7 +86,7 @@
                         <td>
                             <select name="agents[]" >
                                 <% agents.forEach(agent2 => { %>
-                                    <option value="<%= agent2 %>" <% if (agent1 == agent2) { %>selected="selected"<% } %></option><%= agent2 %></option>
+                                    <option value="<%= agent2.id %>" <% if (agent1 == agent2.id) { %>selected="selected"<% } %></option><%= agent2.firstname %> <%= agent2.lastname %></option>
                                 <% }); %>
                             </select>
                         </td>

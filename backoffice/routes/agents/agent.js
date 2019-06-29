@@ -10,8 +10,46 @@ router.use(bodyParser.urlencoded({ extended: true }));
 router.get('/', (req, res) => {
     const agent = Global.AgentHelper.GetById(req.params.id);
 
+    var clone = [];
+
+    for (var intervention of Global.AgentHelper.GetInterventions(agent.id)) {
+        clone.push({
+            id: intervention.id,
+            place: intervention.place,
+            type: intervention.type,
+            beginning_date: intervention.beginning_date,
+            end_date: intervention.end_date,
+            priority: intervention.priority,
+            done: intervention.done
+        });
+    }
+
+    const holidays = Global.HolidayHelper.GetByAgent(agent.id);    
+
     if (agent) {
-        res.json(agent);
+        res.render('agents/agent.ejs', {
+            agent: agent,
+            interventions: clone,
+            holidays: holidays,
+            interventions_columns: [
+                'ID',
+                'Lieu',
+                'Type d\'intervention',
+                'Date de début',
+                'Date de fin',
+                'Priorité',
+                'Clôturé'
+            ],
+            holidays_columns: [
+                'ID',
+                'Agent',
+                'Date de début',
+                'Date de fin',
+                'Type de congé',
+                'Justificatif',
+                'Traité'
+            ]
+        });
     } else {
         res.render('notfound.ejs', {
             resource_type: 'agent',

@@ -8,5 +8,11 @@ module.exports = {
 
     GetById: id => {
         return Helper.GetById('agents', id);
+    },
+
+    GetInterventions: id => {
+        return data["interventions"].filter(element => {
+            return element.agents.includes(id) && !element.done;
+        });
     }
 }

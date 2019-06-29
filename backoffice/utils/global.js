@@ -1,7 +1,7 @@
 module.exports = {
-    //Data: require('./Data'),
     Helper: require('./Helper'),
     IncidentHelper: require('./IncidentHelper'),
     InterventionHelper: require('./InterventionHelper'),
-    AgentHelper: require('./AgentHelper')
+    AgentHelper: require('./AgentHelper'),
+    HolidayHelper: require('./HolidayHelper')
 };

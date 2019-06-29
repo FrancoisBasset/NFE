@@ -32,43 +32,59 @@ module.exports = {
     agents: [
         {
             id: 1,
-            prenom: 'Aleksandr',
-            nom: 'Gagarin',
+            firstname: 'Aleksandr',
+            lastname: 'Gagarin',
+            lat: 48.924400,
+            lng: 2.360108
         },
         {
             id: 2,
-            prenom: 'Anton',
-            nom: 'Bodganov',
+            firstname: 'Anton',
+            lastname: 'Bodganov',
+            lat: 48.924400,
+            lng: 2.360108
         },
         {
             id: 3,
-            prenom: 'Grigori',
-            nom: 'Intelov',
+            firstname: 'Grigori',
+            lastname: 'Intelov',
+            lat: 48.924400,
+            lng: 2.360108
         },
         {
             id: 4,
-            prenom: 'Igor',
-            nom: 'Nodejsov',
+            firstname: 'Igor',
+            lastname: 'Nodejsov',
+            lat: 48.924400,
+            lng: 2.360108
         },
         {
             id: 5,
-            prenom: 'Miron',
-            nom: 'Dotnetin',
+            firstname: 'Miron',
+            lastname: 'Dotnetin',
+            lat: 48.924400,
+            lng: 2.360108
         },
         {
             id: 6,
-            prenom: 'Nastya',
-            nom: 'Samsungina',
+            firstname: 'Nastya',
+            lastname: 'Samsungina',
+            lat: 48.924400,
+            lng: 2.360108
         },
         {
             id: 7,
-            prenom: 'Vladimir',
-            nom: 'Poutine',
+            firstname: 'Vladimir',
+            lastname: 'Poutine',
+            lat: 48.924400,
+            lng: 2.360108
         },
         {
             id: 8,
-            prenom: 'Yaroslav',
-            nom: 'Temperaturovitch',
+            firstname: 'Yaroslav',
+            lastname: 'Temperaturovitch',
+            lat: 48.924400,
+            lng: 2.360108
         }
     ],
 
@@ -174,5 +190,26 @@ module.exports = {
         comment: 'Ouais',
         done: false
     }
+    ],
+
+    holidays: [
+        {
+            id: 1,
+            agent: 1,
+            beginning_date: '2019-07-01',
+            end_date: '2019-07-20',
+            type: 'Congé payé',
+            document: "Coder_proprement.pdf",
+            done: null
+        },
+        {
+            id: 2,
+            agent: 2,
+            beginning_date: '2019-07-01',
+            end_date: '2019-07-20',
+            type: 'Congé maladie',
+            document: "Programming_challenges.pdf",
+            done: null,
+        }
     ]
 };

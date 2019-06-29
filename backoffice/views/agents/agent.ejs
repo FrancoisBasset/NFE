@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>Back office NFE - Agent n°<%= agent.id %></title>
+    <link rel="stylesheet" href="css/global.css" />
+    <link rel="stylesheet" href="css/form.css" />
+    <link rel="stylesheet" href="css/detail.css" />
+    <style>
+        #map {
+            width: 50%;
+  margin: 0 auto;
+            height: 400px;
+        }
+    </style>
+</head>
+
+<%- include("../header"); %>
+
+<body>
+    <h1 class="title">Agent n°<%= agent.id %></h1>
+
+    <form method="post" class="form">
+        <div class="form-line">
+            <label class="form-label">ID :</label>
+            <label class="form-input"><%= agent.id %></label><br>
+        </div>
+
+        <div class="form-line">
+            <label class="form-label">Prénom :</label>
+            <label class="form-input"><%= agent.firstname %></label><br>
+        </div>
+
+        <div class="form-line">
+            <label class="form-label">Nom :</label>
+            <label class="form-input"><%= agent.lastname %></label><br>
+        </div>
+    </form>
+    
+    <div id="map"></div>
+    
+    <%- include('../table.ejs', { resources_type: 'intervention', elements: interventions, columns: interventions_columns, include: true }); %>
+    <%- include('../table.ejs', { resources_type: 'holiday', elements: holidays, columns: holidays_columns, include: true }); %>
+
+    <script>
+        var map;
+        function initMap() {
+            const lat = parseFloat("<%= agent.lat %>");
+            const lng = parseFloat("<%= agent.lng %>");           
+
+            map = new google.maps.Map(document.getElementById('map'), {
+                center: {
+                    lat: lat,
+                    lng: lng
+                },
+                zoom: 16
+          });
+        }
+    </script>
+    <script src="https://maps.googleapis.com/maps/api/js?key=&callback=initMap" async defer></script>
+</body>
+
+</html>

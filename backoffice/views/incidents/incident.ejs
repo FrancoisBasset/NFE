@@ -128,7 +128,7 @@
                         <td>
                             <select name="agents[]" >
                                 <% agents.forEach(agent => { %>
-                                    <option value="<%= agent %>"><%= agent %></option>
+                                    <option value="<%= agent.id %>"><%= agent.firstname %> <%= agent.lastname %></option>
                                 <% }); %>
                             </select>
                         </td>

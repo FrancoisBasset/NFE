@@ -11,6 +11,11 @@ module.exports = {
     },
 
     Add: (incident, body) => {
+        agents = [];
+        for (var agent of body.agents) {
+            agents.push(parseInt(agent));
+        }
+
         Helper.Add('interventions', {
             id: data.interventionsIDs,
             incident_id: incident.id,
@@ -20,7 +25,7 @@ module.exports = {
             priority: body.priority,
             beginning_date: body.beginning_date,
             end_date: body.end_date,
-            agents: body.agents,
+            agents: agents,
             done: false
         });
 
@@ -35,7 +40,11 @@ module.exports = {
         intervention.end_date = body.end_date;
         intervention.hardwares = body.hardwares;
         intervention.priority = body.priority;
-        intervention.agents = body.agents;
+
+        intervention.agents = [];
+        for (var agent in body.agents) {
+            intervention.agents.push(parseInt(agent));
+        }
     },
 
     IsFilled: body => {

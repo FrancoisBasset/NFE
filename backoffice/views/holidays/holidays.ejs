@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>Back office NFE - Congé n°<%= holiday.id %></title>
+    <link rel="stylesheet" href="css/global.css" />
+    <link rel="stylesheet" href="css/form.css" />
+    <link rel="stylesheet" href="css/detail.css" />
+</head>
+
+<%- include("../header"); %>
+
+<body>
+    <h1 class="title">Congé n°<%= holiday.id %></h1>
+
+    <form method="post" class="form">
+        <div class="form-line">
+            <label class="form-label">ID :</label>
+            <label class="form-input"><%= holiday.id %></label><br>
+        </div>
+
+        <div class="form-line">
+            <label class="form-label">Agent :</label>
+            <label class="form-input"><%= holiday.agent %></label><br>
+        </div>
+
+        <div class="form-line">
+            <label class="form-label">Date de début :</label>
+            <label class="form-input"><%= holiday.beginning_date %></label><br>
+        </div>
+
+        <div class="form-line">
+            <label class="form-label">Date de fin :</label>
+            <label class="form-input"><%= holiday.end_date %></label><br>
+        </div>
+
+        <div class="form-line">
+            <label class="form-label">Type de congé :</label>
+            <label class="form-input"><%= holiday.type %></label><br>
+        </div>
+
+        <div class="form-line">
+            <label class="form-label">Justificatif :</label>
+            <a class="form-input" href="/files/<%= holiday.document %>">Voir le justificatif <%= holiday.document %></a><br>
+        </div>
+
+        <% if (holiday.done == null) { %>
+            <input type="hidden" name="id" value="<%= holiday.id %>" />
+            <input type="submit" name="refuse" id="refuse" value="Refuser le congé" />
+            <input type="submit" name="accept" id="accept" value="Accepter le congé" />
+        <% } else { %>
+            <div class="form-line">
+                <label class="form-label">Validé :</label>
+                <% if (holiday.done) { %>
+                    <div class="form-input done"></div>
+                <% } else { %>
+                    <div class="form-input notdone"></div>
+                <% } %><br>
+            </div>
+        <% } %>
+    </form>
+</body>
+
+</html>

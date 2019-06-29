@@ -7,7 +7,9 @@
     <link rel="stylesheet" href="css/table.css" />
 </head>
 
-<%- include("header"); %>
+<% if (!locals.include) { %>
+    <%- include("header"); %>
+<% } %>
 
 <body>
     <h1 class="title">Liste des <%= resources_type %>s</h1>
