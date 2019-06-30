@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html>
+    
+<head>
+    <title>Back office NFE - Créer une intervention</title>
+    <link rel="stylesheet" href="css/global.css" />
+    <link rel="stylesheet" href="css/form.css" />
+    <link rel="stylesheet" href="css/detail.css" />
+</head>
+
+<%- include("../header"); %>
+
+<body>
+    <h1 class="title">Création d'intervention</h1>
+
+    <form method="post" class="form">
+        <div class="form-line">
+            <label class="form-label">Lieu :</label>
+            <input type="text" name="place" class="form-input" value="<%= locals.intervention ? intervention.place : '' %>"/><br>
+        </div>
+
+        <div class="form-line">
+            <label class="form-label">Type d'intervention</label>
+            <select name="type" class="form-input">
+                <% types.forEach(type => { %>
+                    <option value="<%= type %>"><%= type %></option>
+                <% }); %>
+            </select><br>
+        </div>
+
+        <div class="form-line">
+            <label class="form-label">Date de début :</label>
+            <input type="date" name="beginning_date" class="form-input" value="<%= locals.intervention ? intervention.beginning_date : '' %>" /><br>
+        </div>
+
+        <div class="form-line">
+            <label class="form-label">Date de fin :</label>
+            <input type="date" name="end_date" class="form-input" value="<%= locals.intervention ? intervention.end_date : '' %>" /><br>
+        </div>
+
+        <div class="form-line">
+            <label class="form-label">Matériels :</label>
+            <table class="form-input">
+                <tr id="originalMaterialLine">
+                    <td>
+                        <input type="text" name="hardwares[]" list="hardwares" autocomplete="off"/>
+                        <datalist id="hardwares">
+                            <% hardwares.forEach(hardware => { %>
+                                <option value="<%= hardware %>" />
+                            <% }); %>
+                        </datalist>
+                    </td>
+                    <td>
+                        <button type="button" class="addMaterial">+</button>
+                    </td>
+                    <td>
+                        <button type="button" class="remove">-</button>
+                    </td>
+                </tr>
+            </table><br>
+        </div>
+
+        <div class="form-line">
+            <label class="form-label">Priorité :</label>
+            <select name="priority" class="form-input">
+                <% priorities.forEach(priority => { %>
+                    <option value="<%= priority %>" <% if (locals.intervention && priority == intervention.priority) { %> selected="selected" <% } %>><%= priority %></option>
+                <% }); %>
+            </select><br>
+        </div>
+
+        <div class="form-line">
+            <label class="form-label">Agents :</label>
+            <table class="form-input">
+                <tr id="originalAgentLine">
+                    <td>
+                        <select name="agents[]" >
+                            <% agents.forEach(agent => { %>
+                                <option value="<%= agent.id %>"><%= agent.firstname %> <%= agent.lastname %></option>
+                            <% }); %>
+                        </select>
+                    </td>                    
+                    <td>
+                        <button type="button" class="addAgent">+</button>
+                    </td>
+                    <td>
+                        <button type="button" class="remove">-</button>
+                    </td>
+                </tr>
+            </table><br>
+        </div>
+
+        <input type="submit" name="create" id="create" value="Créer l'intervention" />
+    </form>
+</body>
+
+</html>
+
+<script src="js/select.js"></script>

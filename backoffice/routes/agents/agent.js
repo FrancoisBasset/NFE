@@ -7,7 +7,12 @@ router.use('/', express.static('./public'));
 router.use(bodyParser.json());
 router.use(bodyParser.urlencoded({ extended: true }));
 
-router.get('/', (req, res) => {
+router.get('/', (req, res, next) => {
+    if (req.params.id == 'new') {
+        next();
+        return;
+    }
+
     const agent = Global.AgentHelper.GetById(req.params.id);
 
     var clone = [];
@@ -56,6 +61,15 @@ router.get('/', (req, res) => {
             id: req.params.id
         });
     }
+});
+
+router.get('/', (req, res) => {
+    res.render('agents/new_agent.ejs', {
+        /*types: Global.Helper.GetAll('types'),
+        hardwares: Global.Helper.GetAll('hardwares'),
+        priorities: Global.Helper.GetAll('priorities'),
+        agents: Global.AgentHelper.GetAll()*/
+    });
 });
 
 module.exports = router;

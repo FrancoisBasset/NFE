@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>Back office NFE - Créer un agent</title>
+    <link rel="stylesheet" href="css/global.css" />
+    <link rel="stylesheet" href="css/form.css" />
+    <link rel="stylesheet" href="css/detail.css" />
+</head>
+
+<%- include("../header"); %>
+
+<body>
+    <h1 class="title">Création d'un agent</h1>
+
+    <form method="post" class="form">
+        <div class="form-line">
+            <label class="form-label">Prénom :</label>
+            <input type="text" name="firstname" class="form-input" /><br>
+        </div>
+
+        <div class="form-line">
+            <label class="form-label">Nom :</label>
+            <input type="text" name="lastname" class="form-input" /><br>
+        </div>
+
+        <input type="submit" name="create" value="Créer l'agent" />
+    </form>
+</body>
+
+</html>

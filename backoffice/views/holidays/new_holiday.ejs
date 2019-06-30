@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>Back office NFE - Créer un congé</title>
+    <link rel="stylesheet" href="css/global.css" />
+    <link rel="stylesheet" href="css/form.css" />
+    <link rel="stylesheet" href="css/detail.css" />
+</head>
+
+<%- include("../header"); %>
+
+<body>
+    <h1 class="title">Création de congés</h1>
+
+    <form method="post" class="form">
+        <div class="form-line">
+            <label class="form-label">Date de début :</label>
+            <input type="date" name="beginning_date" /><br>
+        </div>
+
+        <div class="form-line">
+            <label class="form-label">Date de fin :</label>
+            <input type="date" class="form-input" /><br>
+        </div>
+
+        <div class="form-line">
+            <label class="form-label">Type de congé :</label>
+            <select name="type" class="form-input">
+                <option value="paid">Congé payé</option>
+                <option value="sick">Congé maladie</option>
+            </select><br>
+        </div>
+
+        <div class="form-line">
+            <label class="form-label">Justificatif :</label>
+            <input type="file" name="document" class="form-input" /><br>
+        </div>
+        
+        <input type="submit" name="create" id="create" value="Créer le congé" />    
+    </form>
+</body>
+
+</html>

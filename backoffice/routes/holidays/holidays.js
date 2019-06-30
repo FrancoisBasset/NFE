@@ -7,7 +7,12 @@ router.use('/', express.static('./public'));
 router.use(bodyParser.json());
 router.use(bodyParser.urlencoded({ extended: true }));
 
-router.get('/', (req, res) => {
+router.get('/', (req, res, next) => {
+    if (req.params.id == 'new') {
+        next();
+        return;
+    }
+
     const holiday = Global.HolidayHelper.GetById(req.params.id);
 
     if (holiday) {
@@ -20,6 +25,10 @@ router.get('/', (req, res) => {
             id: req.params.id
         });
     }
+});
+
+router.get('/', (req, res) => {
+    res.render('holidays/new_holiday.ejs');
 });
 
 router.post('/', (req, res) => {

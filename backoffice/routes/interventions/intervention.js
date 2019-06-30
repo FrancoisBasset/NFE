@@ -7,7 +7,12 @@ router.use('/', express.static('./public'));
 router.use(bodyParser.json());
 router.use(bodyParser.urlencoded({ extended: true }));
 
-router.get('/', (req, res) => {
+router.get('/', (req, res, next) => {
+    if (req.params.id == 'new') {
+        next();
+        return;
+    }
+
     const intervention = Global.InterventionHelper.GetById(req.params.id);
 
     if (intervention) {
@@ -18,6 +23,15 @@ router.get('/', (req, res) => {
             id: req.params.id,
         });
     }
+});
+
+router.get('/', (req, res) => {
+    res.render('interventions/new_intervention.ejs', {
+        types: Global.Helper.GetAll('types'),
+        hardwares: Global.Helper.GetAll('hardwares'),
+        priorities: Global.Helper.GetAll('priorities'),
+        agents: Global.AgentHelper.GetAll()
+    });
 });
 
 router.post('/', (req, res) => {    

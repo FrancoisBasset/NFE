@@ -17,6 +17,11 @@
     <form method="post">
         <table id="elements" class="<%= resources_type %>s">
             <thead>
+                <tr>
+                    <td colspan="11">
+                        <a href="/<%= resources_type %>s/new" class="control-button">Créer <%= resources_type %></a>
+                    </td>
+                </tr>
                 <% if (locals.action) { %>
                     <tr>
                         <td colspan="11">
