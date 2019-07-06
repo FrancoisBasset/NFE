@@ -26,11 +26,8 @@ router.get('/', (req, res, next) => {
 });
 
 router.get('/', (req, res) => {
-    res.render('interventions/new_intervention.ejs', {
-        types: Global.Helper.GetAll('types'),
-        hardwares: Global.Helper.GetAll('hardwares'),
-        priorities: Global.Helper.GetAll('priorities'),
-        agents: Global.AgentHelper.GetAll()
+    res.render('new.ejs', {
+        items: Global.Helper.GetAll('interventions_form')
     });
 });
 

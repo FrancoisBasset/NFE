@@ -28,7 +28,9 @@ router.get('/', (req, res, next) => {
 });
 
 router.get('/', (req, res) => {
-    res.render('holidays/new_holiday.ejs');
+    res.render('new.ejs', {
+        items: Global.Helper.GetAll('holidays_form')
+    });
 });
 
 router.post('/', (req, res) => {

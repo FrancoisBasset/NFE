@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>Back office NFE</title>
+    <link rel="stylesheet" href="css/global.css" />
+    <link rel="stylesheet" href="css/form.css" />
+</head>
+
+<%- include("header"); %>
+
+<body>
+    <form method="post" class="form" id="form"></form>
+
+    <script>
+        var items = <%- JSON.stringify(items) %>;
+
+        var form = document.getElementById('form');
+
+        var html = '<br><br>';
+
+        for (var item of items) {
+            html += '<div class="form-line">';
+
+            html += '<label class="form-label">' + item.label + '</label>';
+
+            var options = "";
+            for (var option of item.options) {
+                options += option.label + '="' + option.value + '"';
+            }
+
+            if (item.universal.category == 'select') {
+                var list = "";
+                for (var element of item.data) {
+                    list += '<option name="' + element + '">' + element + '</option>';
+                }
+
+                html += '<select ' + options + ' class="form-input">';
+                html += list;
+                html += '</select><br>';
+            } else if (item.universal.category == "textarea") {
+                html += '<textarea ' + options + ' class="form-input"></textarea><br><br>';
+            } else {
+                html += '<' + item.universal.category + ' type="' + item.universal.label + '"' + options + 'class="form-input"/><br>';
+            }
+
+            html += '</div>';
+        }
+
+        form.innerHTML = html;
+    </script>
+</body>
