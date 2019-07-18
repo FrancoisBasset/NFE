@@ -5,7 +5,7 @@
   "main": "index.js",
   "scripts": {
     "dev": "node-dev index.js",
-    "start": "node index.js",
+    "start": "node-dev index.js",
     "scanner": "sonar-scanner",
     "test": "echo \"Error: no test specified\" && exit 1"
   },

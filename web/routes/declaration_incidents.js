@@ -6,61 +6,57 @@ const bodyParser = require('body-parser');
 router.use(bodyParser.json());
 router.use(bodyParser.urlencoded({ extended: true }));
 
-router.get('/', (req, res) => {
-    const host = Global.GetHost(req.headers.host) + '/data';
+global.regions = [];
 
-    request.get(host, { json: true }, (e, r, body) => {
+router.get('/', (req, res) => {
+    const url = 'https://nfe-official.herokuapp.com/externals/regions';
+
+    request.get(url, { json: true }, (e, r, body) => {
+        global.regions = body.regions;
+
         if (e) {
             res.render('declaration_incidents.ejs', {
-                types: [],
-                error: 'Impossible de récupérer les types d\'incidents, Impossible de créer un incident, veuillez réessayer ultérieurement'
+                regions: global.regions,
+                error: 'Impossible de joindre l\'API, veuillez réessayer ultérieurement'
             });
         } else {
             res.render('declaration_incidents.ejs', {
-                types: body.types
+                regions: global.regions
             });
         }
     });
 });
 
 router.post('/', (req, res) => {
-    const host = Global.GetHost(req.headers.host) + '/data';
+    if (!Global.IncidentIsFilled(req.body)) {
+        res.render('declaration_incidents.ejs', {
+            regions: global.regions,
+            body: req.body,
+            error: 'Le formulaire n\'a pas été correctement renseigné'
+        });
 
-    request.get(host, { json: true}, (e, r, data) => {
+        return;
+    }
+
+    const url = 'https://nfe-official.herokuapp.com/externals/incident';
+
+    req.body.region = {
+        id: parseInt(req.body.region)
+    };
+
+    request.post(url, { json: req.body}, (e, r) => {
         if (e) {
             res.render('declaration_incidents.ejs', {
-                types: [],
+                regions: [],
                 body: req.body,
                 error: 'Impossible de créer un incident, veuillez réessayer ultérieurement'
             });
-
-            return;
-        }
-
-        if (!Global.IncidentIsFilled(req.body)) {
+        } else {
             res.render('declaration_incidents.ejs', {
-                types: data.types,
-                body: req.body,
-                error: 'Le formulaire n\'a pas été correctement renseigné'
+                regions: regions,
+                body: req.body
             });
-
-            return;
         }
-    
-        request.post(host, { json: req.body}, (e, r) => {
-            if (e) {
-                res.render('declaration_incidents.ejs', {
-                    types: [],
-                    body: req.body,
-                    error: 'Impossible de créer un incident, veuillez réessayer ultérieurement'
-                });
-            } else {
-                res.render('declaration_incidents.ejs', {
-                    types: data.types,
-                    body: req.body
-                });
-            }
-        });        
     });    
 });
 

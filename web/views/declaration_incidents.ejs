@@ -15,41 +15,41 @@
 
     <form method="post" class="form">
         <div class="form-line">
-            <label class="form-label" for="place">Lieu de l'incident :</label>
+            <label class="form-label">Lieu de l'incident :</label>
             <input type="text" name="place" id="place" class="form-input" value="<%= locals.body ? body.place : '' %>" /><br>
         </div>
 
         <div class="form-line">
-            <label class="form-label" for="incident_date">Date d'apparition :</label>
+            <label class="form-label">Date d'apparition :</label>
             <input type="date" name="date" id="date" class="form-input" value="<%= locals.body ? body.date : '' %>" /><br>
-        </div>        
+        </div>
 
         <div class="form-line">
-            <label class="form-label" for="incident_type">Type d'incident :</label>
-            <select name="type" id="type" class="form-input">
-                <% types.forEach(type => { %>
-                    <option value="<%= type %>" <% if (locals.body && type == body.type) { %> selected="selected" <% } %>><%= type %></option>
+            <label class="form-label">Région :</label>
+            <select name="region" class="form-input">
+                <% regions.forEach(region => { %>
+                    <option value="<%= region.id %>"><%= region.name %></option>
                 <% }); %>
             </select><br>
         </div>
 
         <div class="form-line">
-            <label class="form-label" for="client_name">Nom du client :</label>
+            <label class="form-label">Nom du client :</label>
             <input type="text" name="name" id="name" class="form-input" value="<%= locals.body ? body.name : '' %>" /><br>
         </div>
 
         <div class="form-line">
-            <label class="form-label" for="phone">Numéro de téléphone :</label>
+            <label class="form-label">Numéro de téléphone :</label>
             <input type="text" name="phone" id="phone" class="form-input" value="<%= locals.body ? body.phone : '' %>" /><br>
         </div>
 
         <div class="form-line">
-            <label class="form-label" for="mail">Adresse mail :</label>
+            <label class="form-label">Adresse mail :</label>
             <input type="email" name="mail" id="mail" class="form-input" value="<%= locals.body ? body.mail : '' %>" /><br>
         </div>
 
         <div class="form-line">
-            <label class="form-label" for="comment">Commentaire :</label>
+            <label class="form-label">Commentaire :</label>
             <textarea name="comment" id="comment" class="form-input"><%= locals.body ? body.comment : '' %></textarea><br><br>
         </div>
 
@@ -68,7 +68,7 @@
 
             <text>Lieu de l'incident : <%= body.place %></text><br>
             <text>Date d'apparition : <%= body.date %></text><br>
-            <text>Type d'incident : <%= body.type %></text><br>
+            <text>Region : <%= body.region %></text><br>
             <text>Nom du client : <%= body.name %></text><br>
             <text>Numéro de téléphone : <%= body.phone %></text><br>
             <text>Adresse mail : <%= body.mail %></text><br>
