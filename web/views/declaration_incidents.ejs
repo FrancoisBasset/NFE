@@ -15,11 +15,6 @@
 
     <form method="post" class="form">
         <div class="form-line">
-            <label class="form-label">Lieu de l'incident :</label>
-            <input type="text" name="place" id="place" class="form-input" value="<%= locals.body ? body.place : '' %>" /><br>
-        </div>
-
-        <div class="form-line">
             <label class="form-label">Date d'apparition :</label>
             <input type="date" name="date" id="date" class="form-input" value="<%= locals.body ? body.date : '' %>" /><br>
         </div>
@@ -53,6 +48,10 @@
             <textarea name="comment" id="comment" class="form-input"><%= locals.body ? body.comment : '' %></textarea><br><br>
         </div>
 
+        <input type="hidden" id="latitude" name="latitude">
+        <input type="hidden" id="longitude" name="longitude">
+        <input type="hidden" id="geo_error" name="geo_error">
+
         <input type="submit" id="declare_incident" value="Déclarer l'incident" />
     </form>
 
@@ -81,4 +80,17 @@
 
 <script>
     document.getElementById('date').value = new Date().toISOString().substring(0, 10);
+    document.getElementById('geo_error').value = 'true';
+
+    navigator.geolocation.getCurrentPosition((res, err) => {
+//        console.log(res);
+  //      console.log(err);
+        if (res.coords.latitude == '' || res.coords.longitude == '') {
+            document.getElementById('geo_error').value = 'true';
+        } else {
+            document.getElementById('latitude').value = res.coords.latitude;
+            document.getElementById('longitude').value = res.coords.longitude;
+            document.getElementById('geo_error').value = null;
+        }
+    });
 </script>

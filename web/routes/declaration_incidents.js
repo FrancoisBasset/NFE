@@ -28,6 +28,16 @@ router.get('/', (req, res) => {
 });
 
 router.post('/', (req, res) => {
+    if (req.body.geo_error == 'true') {
+        res.render('declaration_incidents.ejs', {
+            regions: global.regions,
+            body: req.body,
+            error: 'Pas de géolocalisation !'
+        });
+
+        return;
+    }
+
     if (!Global.IncidentIsFilled(req.body)) {
         res.render('declaration_incidents.ejs', {
             regions: global.regions,
@@ -43,6 +53,16 @@ router.post('/', (req, res) => {
     req.body.region = {
         id: parseInt(req.body.region)
     };
+
+    req.body.coordinates = {
+        latitude: req.body.latitude,
+        longitude: req.body.longitude   
+    };
+
+    delete req.body.latitude;
+    delete req.body.longitude;
+
+    console.log(req.body);
 
     request.post(url, { json: req.body}, (e, r) => {
         if (e) {

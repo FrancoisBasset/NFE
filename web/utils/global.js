@@ -1,7 +1,6 @@
 module.exports = {
     IncidentIsFilled: body => {
         if (
-            body.place.trim() == '' ||
             body.date.trim() == '' ||
             body.region.trim() == '' ||
             body.name.trim() == '' ||
