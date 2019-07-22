@@ -62,7 +62,7 @@ router.post('/', (req, res) => {
     delete req.body.latitude;
     delete req.body.longitude;
 
-    req.body.region = global.regions[req.body.region.id - 1].name;
+    //req.body.region = global.regions[req.body.region.id - 1].name;
     //console.log(req.body);
 //    return;
 
