@@ -62,7 +62,9 @@ router.post('/', (req, res) => {
     delete req.body.latitude;
     delete req.body.longitude;
 
-    console.log(req.body);
+    req.body.region = global.regions[req.body.region.id - 1].name;
+    //console.log(req.body);
+//    return;
 
     request.post(url, { json: req.body}, (e, r) => {
         if (e) {
@@ -72,6 +74,8 @@ router.post('/', (req, res) => {
                 error: 'Impossible de créer un incident, veuillez réessayer ultérieurement'
             });
         } else {
+
+
             res.render('declaration_incidents.ejs', {
                 regions: regions,
                 body: req.body
